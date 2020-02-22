@@ -1,5 +1,10 @@
-.timer-container
-  .timer-text
-    Time left:
-  .timer{data: {timer_start: @timer.created_at}}
-    = @timer.created_at
+.sign-out-link
+  = link_to "Sign Out", sign_out_path, method: :delete
+.timer-page
+  .timer-details
+    Time left for
+    = current_user.full_name
+
+  .timer-container
+    .timer{data: {timer_start: @timer.created_at}}
+      = @timer.created_at
