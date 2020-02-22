@@ -3,7 +3,7 @@
 .timer-page
   .timer-details
     Time left for
-    = current_user.full_name
+    = @timer.user.full_name
 
   .timer-container
     .timer{data: {timer_start: @timer.created_at}}
