@@ -15,3 +15,27 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+//
+//
+
+document.addEventListener("turbolinks:load", () => {
+  const fifteenMinutes = 1000 * 60 * 15;
+  const timer = document.querySelector(".timer");
+  const startTime = new Date(timer.getAttribute("data-timer-start")).getTime();
+  const endTime = startTime + fifteenMinutes;
+
+  const interval = setInterval(()=>{
+    const now = new Date().getTime()
+    const distance = endTime - now;
+    // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    timer.innerHTML = `${minutes}m ${seconds}s`;
+
+    if (distance < 0) {
+      clearInterval(interval);
+      timer.innerHTML = "TIMES UP";
+    }
+  })
+})

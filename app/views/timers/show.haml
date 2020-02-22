@@ -1,2 +1,5 @@
 .timer-container
-  = @timer.created_at
+  .timer-text
+    Time left:
+  .timer{data: {timer_start: @timer.created_at}}
+    = @timer.created_at
