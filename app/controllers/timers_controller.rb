@@ -8,6 +8,11 @@ class TimersController < ApplicationController
 
   def create
     @timer = Timer.create(timer_params.merge(facilitator: current_user))
+
+    if @timer.persisted?
+      ActionCable.server.broadcast 'timer_channel', @timer.as_json
+    end
+
     render :show
   end
 
