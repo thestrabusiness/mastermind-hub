@@ -2,9 +2,17 @@
   = link_to "Sign Out", sign_out_path, method: :delete
 .timer-page
   .timer-details
-    Time left for
-    = @timer.user.full_name
+    .time-name
+      Time left for
+      = @timer.user.full_name
 
-  .timer-container
-    .timer{data: {timer_start: @timer.created_at}}
-      = @timer.created_at
+    .timer-container
+      .timer{data: {timer_start: @timer.created_at}}
+        = @timer.created_at
+
+  - if current_user.facilitator?
+    .timer-controls
+      = form_for Timer.new, url: timer_path do |form|
+        = form.select :user_id, options_for_select(User.select_options)
+        = form.submit
+
