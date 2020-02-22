@@ -1,0 +1,9 @@
+.sign-up#clearance
+  %h2=t('.title')
+  - if @user.errors.present?
+    .errors
+      Please fill out all fields
+
+  =render '/users/form'
+  .other-links
+    =link_to t('.sign_in'), sign_in_path

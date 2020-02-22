@@ -1,0 +1,12 @@
+.errors {
+  color: red;
+}
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    width: 35%;
+  }
+}
