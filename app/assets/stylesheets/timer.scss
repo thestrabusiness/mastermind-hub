@@ -4,6 +4,8 @@
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  font-size: 36px;
+  font-family: sans-serif;
 }
 
 .timer-details {
@@ -11,10 +13,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  div {
+    margin: 10px;
+  }
 }
 
 .timer-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 48px;
 }
