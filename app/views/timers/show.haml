@@ -9,7 +9,7 @@
     - if @timer.present?
       .timer-name
         Time left for
-        = @timer.user.full_name
+        = @timer.user.first_plus_initial
 
       .timer-container
         .timer{data: {timer_end: @timer.ends_at}}

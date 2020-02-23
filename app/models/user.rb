@@ -15,6 +15,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def first_plus_initial
+    "#{first_name} #{last_name[0]}."
+  end
+
   def self.select_options
     all.map { |user| [user.full_name, user.id] }
   end
