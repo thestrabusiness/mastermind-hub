@@ -19,10 +19,8 @@ require("channels")
 //
 
 document.addEventListener("turbolinks:load", () => {
-  const fifteenMinutes = 1000 * 60 * 15;
   const timer = document.querySelector(".timer");
-  const startTime = new Date(timer.getAttribute("data-timer-start")).getTime();
-  const endTime = startTime + fifteenMinutes;
+  const endTime = new Date(timer.getAttribute("data-timer-end")).getTime();
   const timerSound = document.getElementById("timer_alert")
   timerSound.volume = 0.6;
 
