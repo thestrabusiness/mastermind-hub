@@ -23,6 +23,8 @@ document.addEventListener("turbolinks:load", () => {
   const timer = document.querySelector(".timer");
   const startTime = new Date(timer.getAttribute("data-timer-start")).getTime();
   const endTime = startTime + fifteenMinutes;
+  const timerSound = document.getElementById("timer_alert")
+  timerSound.volume = 0.6;
 
   const interval = setInterval(()=>{
     const now = new Date().getTime()
@@ -32,6 +34,10 @@ document.addEventListener("turbolinks:load", () => {
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     timer.innerHTML = `${minutes}m ${seconds}s`;
+
+    if (distance >= 0 && distance <= 500 && timerSound.paused) {
+      timerSound.play();
+    }
 
     if (distance < 0) {
       clearInterval(interval);
