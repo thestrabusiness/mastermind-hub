@@ -20,7 +20,7 @@ RSpec.feature 'User visits timer page', js: true do
 
   context 'When a timer is running' do
     it 'displays the user name' do
-      user = create(:user)
+      user = create(:user, :with_group)
       timer = create(:timer)
       visit timer_path(as: user)
       expect(page)

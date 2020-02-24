@@ -1,0 +1,10 @@
+= form_for @group do |form|
+  .form-field
+    = form.label :name
+    = form.text_field :name
+
+  .form-field
+    = label_tag :emails
+    = text_field_tag :emails
+
+  = form.submit

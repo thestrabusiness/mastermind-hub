@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  has_and_belongs_to_many :groups
+
   FACILITATOR = 'facilitator'.freeze
   MEMBER = 'member'.freeze
   ROLES = [FACILITATOR, MEMBER].freeze

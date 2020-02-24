@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   end
 
   resource :timer
+
+  resources :groups
   resources :users, only: :create
 end

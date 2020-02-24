@@ -20,7 +20,7 @@ User.create(
   last_name: 'Test'
 )
 
-Timer.create!(user: kurt, facilitator: anthony)
+group = Group.create(name: 'Fellas', facilitator: anthony)
+group.users << User.all
 
-
-
+Timer.create!(user: kurt, group: group)

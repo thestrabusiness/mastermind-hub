@@ -7,7 +7,7 @@ class TimersController < ApplicationController
   end
 
   def create
-    @timer = Timer.create(timer_params.merge(facilitator: current_user))
+    @timer = Timer.create(timer_params.merge(group: current_user.groups.first))
 
     if @timer.persisted?
       ActionCable.server.broadcast 'timer_channel', @timer.as_json

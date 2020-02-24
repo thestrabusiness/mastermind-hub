@@ -10,18 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_23_143200) do
+ActiveRecord::Schema.define(version: 2020_02_25_183817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "timers", force: :cascade do |t|
+  create_table "group_invites", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", null: false
+    t.string "token", null: false
+    t.boolean "accepted", default: false, null: false
+    t.bigint "group_id", null: false
+    t.index ["email"], name: "index_group_invites_on_email"
+    t.index ["group_id"], name: "index_group_invites_on_group_id"
+    t.index ["token"], name: "index_group_invites_on_token"
+  end
+
+  create_table "groups", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "facilitator_id", null: false
+    t.string "name", null: false
+    t.index ["facilitator_id"], name: "index_groups_on_facilitator_id"
+  end
+
+  create_table "groups_users", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["group_id", "user_id"], name: "index_groups_users_on_group_id_and_user_id", unique: true
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
+  end
+
+  create_table "timers", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.bigint "duration", default: 900, null: false
-    t.index ["facilitator_id"], name: "index_timers_on_facilitator_id"
+    t.bigint "group_id", null: false
+    t.index ["group_id"], name: "index_timers_on_group_id"
     t.index ["user_id"], name: "index_timers_on_user_id"
   end
 
