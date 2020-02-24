@@ -15,6 +15,10 @@ class Timer < ApplicationRecord
     created_at + duration
   end
 
+  def ends_at_for_js
+    ends_at.strftime('%B %d, %Y %H:%m:%S UTC')
+  end
+
   private
 
   def facilitator_role

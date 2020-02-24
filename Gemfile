@@ -5,9 +5,11 @@ ruby '2.7.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clearance'
+gem 'factory_bot_rails'
 gem 'haml'
 gem 'haml-rails'
 gem 'pg'
+gem 'pry'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'sass-rails', '>= 6'
