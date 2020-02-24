@@ -11,6 +11,10 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+Capybara.configure do |config|
+  config.javascript_driver = :selenium_headless
+end
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
