@@ -13,7 +13,7 @@
         .timer{data: {timer_end: @timer.ends_at_for_js}}
           = @timer.created_at
 
-    - if current_user.facilitator?
+    - if @group.facilitator == current_user
       .timer-controls
         .title New Timer
         = form_for Timer.new, url: group_timer_path(@group, @timer) do |form|

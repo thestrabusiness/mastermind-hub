@@ -8,9 +8,10 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(create_group_params)
+    @group = Group.new(group_params)
 
     if @group.save
+      create_membership
       invite_users
       redirect_to group_path(@group)
     else
@@ -24,16 +25,16 @@ class GroupsController < ApplicationController
 
   private
 
-  def create_group_params
-    group_params.merge(facilitator: current_user, user_ids: [current_user.id])
-  end
-
   def group_params
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name).merge(creator: current_user)
   end
 
   def emails
     params.fetch(:emails)&.strip&.split(',') || []
+  end
+
+  def create_membership
+    @group.memberships.create(user: current_user, role: Membership::FACILITATOR)
   end
 
   def invite_users

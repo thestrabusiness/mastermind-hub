@@ -47,7 +47,7 @@ RSpec.feature 'User visits timer page', js: true do
 
   context "As a 'facilitator'" do
     it 'displays the new timer form' do
-      user = create(:user, :facilitator, :with_group)
+      user = create(:user, :facilitator)
 
       visit group_timer_path(user.groups.first, as: user)
 

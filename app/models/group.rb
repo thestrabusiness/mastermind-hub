@@ -1,15 +1,12 @@
 class Group < ApplicationRecord
-  has_and_belongs_to_many :users
-  belongs_to :facilitator, class_name: 'User'
+  belongs_to :creator, class_name: 'User'
+  has_many :memberships
+  has_many :users, through: :memberships
   has_many :timers
 
   validates :name, presence: true
-  validates :facilitator, presence: true
-  validate :facilitator_role
 
-  private
-
-  def facilitator_role
-    facilitator.role == User::FACILITATOR
+  def facilitator
+    memberships.find_by(role: Membership::FACILITATOR)&.user
   end
 end

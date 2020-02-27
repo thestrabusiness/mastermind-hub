@@ -6,12 +6,15 @@ FactoryBot.define do
     password { 'password' }
 
     trait :facilitator do
-      role { User::FACILITATOR }
+      after(:create) do |user, _|
+        group = create(:group, creator: user)
+        group.memberships.create(user: user, role: Membership::FACILITATOR)
+      end
     end
 
     trait :with_group do
       after(:create) do |user, _|
-        group = create(:group, facilitator: user)
+        group = create(:group, creator: user)
         group.users << user
       end
     end
@@ -19,7 +22,7 @@ FactoryBot.define do
 
   factory :group do
     sequence(:name) { |n| "Group #{n}" }
-    association :facilitator, factory: :user
+    association :creator, factory: :user
   end
 
   factory :timer do

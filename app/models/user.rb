@@ -1,17 +1,9 @@
 class User < ApplicationRecord
   include Clearance::User
 
-  has_and_belongs_to_many :groups
-
-  FACILITATOR = 'facilitator'.freeze
-  MEMBER = 'member'.freeze
-  ROLES = [FACILITATOR, MEMBER].freeze
-
-  ROLES.each do |role|
-    define_method "#{role}?" do
-      self.role == role
-    end
-  end
+  has_many :memberships
+  has_many :groups, through: :memberships
+  has_many :created_groups, class_name: 'Group', foreign_key: :creator_id
 
   def full_name
     "#{first_name} #{last_name}"

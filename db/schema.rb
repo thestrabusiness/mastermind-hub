@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_183817) do
+ActiveRecord::Schema.define(version: 2020_02_27_205148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,17 +30,18 @@ ActiveRecord::Schema.define(version: 2020_02_25_183817) do
   create_table "groups", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "facilitator_id", null: false
     t.string "name", null: false
-    t.index ["facilitator_id"], name: "index_groups_on_facilitator_id"
+    t.bigint "creator_id", null: false
+    t.index ["creator_id"], name: "index_groups_on_creator_id"
   end
 
-  create_table "groups_users", force: :cascade do |t|
-    t.bigint "group_id", null: false
+  create_table "memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.index ["group_id", "user_id"], name: "index_groups_users_on_group_id_and_user_id", unique: true
-    t.index ["group_id"], name: "index_groups_users_on_group_id"
-    t.index ["user_id"], name: "index_groups_users_on_user_id"
+    t.bigint "group_id", null: false
+    t.string "role", default: "member", null: false
+    t.index ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id"
+    t.index ["group_id"], name: "index_memberships_on_group_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "timers", force: :cascade do |t|
