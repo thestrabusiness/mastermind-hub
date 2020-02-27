@@ -2,8 +2,7 @@ anthony = User.create(
   email: 'anthony@example.com',
   password: 'password',
   first_name: 'Anthony',
-  last_name: 'Test',
-  role: User::FACILITATOR
+  last_name: 'Test'
 )
 
 kurt = User.create(
@@ -13,14 +12,15 @@ kurt = User.create(
   last_name: 'Test'
 )
 
-User.create(
+eric = User.create(
   email: 'Eric@example.com',
   password: 'password',
   first_name: 'Eric',
   last_name: 'Test'
 )
 
-group = Group.create(name: 'Fellas', facilitator: anthony)
-group.users << User.all
+group = Group.create(name: 'Fellas', creator: anthony)
+group.memberships.create(user: anthony, role: Membership::FACILITATOR)
+group.users << [kurt, eric]
 
 Timer.create!(user: kurt, group: group)
