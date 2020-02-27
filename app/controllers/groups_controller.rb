@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(group_params)
+    @group = Group.new(create_group_params)
 
     if @group.save
       invite_users
@@ -24,8 +24,12 @@ class GroupsController < ApplicationController
 
   private
 
+  def create_group_params
+    group_params.merge(facilitator: current_user, user_ids: [current_user.id])
+  end
+
   def group_params
-    params.require(:group).permit(:name).merge(facilitator: current_user)
+    params.require(:group).permit(:name)
   end
 
   def emails
