@@ -8,7 +8,7 @@ class TimersController < ApplicationController
   end
 
   def create
-    @timer = @group.timers.create(timer_create_params)
+    @timer = @group.timers.create(timer_params)
 
     if @timer.persisted?
       ActionCable.server.broadcast 'timer_channel', @timer.as_json
@@ -35,9 +35,5 @@ class TimersController < ApplicationController
 
   def timer_params
     params.require(:timer).permit(:duration, :user_id)
-  end
-
-  def timer_create_params
-    timer_params.merge(group: current_user.groups.first)
   end
 end

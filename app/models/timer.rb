@@ -15,6 +15,6 @@ class Timer < ApplicationRecord
   end
 
   def ends_at_for_js
-    ends_at.strftime('%B %d, %Y %H:%m:%S UTC')
+    ends_at.strftime('%B %d, %Y %H:%M:%S UTC')
   end
 end
