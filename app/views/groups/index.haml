@@ -1,4 +1,11 @@
-- if @groups
+- if @groups.length > 0
   - @groups.each do |group|
     .list-item
       = group.name
+
+- else
+  %p.no-records-message
+    You don't belong to any groups yet.
+
+  %p.no-records-message
+    Take a look at your invites or start your own.
