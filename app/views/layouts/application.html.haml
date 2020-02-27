@@ -8,4 +8,10 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    - if signed_in?
+      .navbar
+        .navbar-item
+          = link_to "Groups", groups_path
+          = link_to "Invites", group_invites_path
+
     = yield

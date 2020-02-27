@@ -1,5 +1,5 @@
 .list
-  = @group_invites.each do |invite|
+  - @group_invites.each do |invite|
     .list-item
       = invite.created_at
       = invite.group.name

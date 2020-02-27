@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   constraints Clearance::Constraints::SignedIn.new do
-    root to: 'timers#show', as: :signed_in_root
+    root to: 'groups#index', as: :signed_in_root
   end
 
   constraints Clearance::Constraints::SignedOut.new do
