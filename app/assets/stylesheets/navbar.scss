@@ -1,0 +1,18 @@
+.navbar {
+  align-items: center;
+  background: lightblue;
+  display: flex;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .navbar-item {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}

@@ -1,12 +1,13 @@
-- if @groups.length > 0
-  - @groups.each do |group|
-    .list-item
-      = group.name
-      = link_to "Timer", group_timer_path(group)
+.primary-list
+  - if @groups.length > 0
+    - @groups.each do |group|
+      .list-item
+        = group.name
+        = link_to "Timer", group_timer_path(group)
 
-- else
-  %p.no-records-message
-    You don't belong to any groups yet.
+  - else
+    %p.no-records-message
+      You don't belong to any groups yet.
 
-  %p.no-records-message
-    Take a look at your invites or start your own.
+    %p.no-records-message
+      Take a look at your invites or start your own.

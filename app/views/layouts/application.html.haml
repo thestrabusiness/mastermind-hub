@@ -12,7 +12,9 @@
       .navbar
         .navbar-item
           = link_to "Sign Out", sign_out_path, method: :delete
+        .navbar-item
           = link_to "Groups", groups_path
+        .navbar-item
           = link_to "Invites", group_invites_path
 
     = yield
