@@ -7,9 +7,11 @@ Rails.application.routes.draw do
     root to: 'sessions#new'
   end
 
-  resource :timer
 
-  resources :groups
+  resources :groups do
+    resource :timer, only: [:show, :create]
+  end
+
   resources :group_invites do
     member do
       post 'accept'

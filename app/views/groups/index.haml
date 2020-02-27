@@ -2,6 +2,7 @@
   - @groups.each do |group|
     .list-item
       = group.name
+      = link_to "Timer", group_timer_path(group)
 
 - else
   %p.no-records-message

@@ -1,5 +1,3 @@
-.sign-out-link
-  = link_to "Sign Out", sign_out_path, method: :delete
 .timer-page
   .timer-details
     - if @timer.nil?
@@ -18,7 +16,7 @@
     - if current_user.facilitator?
       .timer-controls
         .title New Timer
-        = form_for Timer.new, url: timer_path do |form|
+        = form_for Timer.new, url: group_timer_path(@group, @timer) do |form|
           .form-field
             = form.label :duration
             = form.select :duration, options_for_select(Timer.duration_select_options)
