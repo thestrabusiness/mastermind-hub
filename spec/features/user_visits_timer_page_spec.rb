@@ -53,6 +53,17 @@ RSpec.feature 'User visits timer page', js: true do
 
       expect(page).to have_css('.timer-controls')
     end
+
+    it 'creates a timer' do
+      user = create(:user, :facilitator)
+
+      visit group_timer_path(user.groups.first, as: user)
+      select 15, from: :timer_duration
+      select user.full_name, from: :timer_user_id
+      click_on 'Create Timer'
+
+      expect(page).to have_content "Time left for #{user.first_plus_initial}"
+    end
   end
 
   context 'Without being signed in' do

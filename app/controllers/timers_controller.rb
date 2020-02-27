@@ -28,7 +28,7 @@ class TimersController < ApplicationController
   end
 
   def check_role
-    if !current_user.facilitator?
+    if @group.facilitator != current_user
       redirect_to timer_path
     end
   end
