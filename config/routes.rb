@@ -10,5 +10,11 @@ Rails.application.routes.draw do
   resource :timer
 
   resources :groups
+  resources :group_invites do
+    member do
+      post 'accept'
+      post 'reject'
+    end
+  end
   resources :users, only: :create
 end

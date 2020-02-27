@@ -3,6 +3,8 @@ class GroupInvite < ApplicationRecord
 
   belongs_to :group
 
+  scope :unaccepted, -> { where(accepted: false) }
+
   private
 
   def generate_token

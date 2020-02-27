@@ -1,0 +1,9 @@
+.list
+  = @group_invites.each do |invite|
+    .list-item
+      = invite.created_at
+      = invite.group.name
+
+      .actions
+        = link_to "Accept", accept_group_invite_path(invite), method: :post
+        = link_to "Reject", reject_group_invite_path(invite), method: :post
