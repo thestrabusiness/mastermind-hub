@@ -1,0 +1,14 @@
+.title
+  = @call.scheduled_on
+.primary-list#notes_container{data: {call_id: @call.id}}
+  - @call.notes.each do |note|
+    .list_item
+      = note.author.full_name
+      = note.body
+
+.form
+  .title Add a note
+  = form_for Note.new, url: call_note_path(@call) do |form|
+    .form-field
+      = form.text_area :body
+    = form.submit

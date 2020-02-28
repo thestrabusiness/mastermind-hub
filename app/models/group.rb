@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships
   has_many :timers
+  has_many :calls
 
   validates :name, presence: true
 

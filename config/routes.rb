@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
 
 
+  resources :calls, only: :show do
+    resource :note, only: :create
+  end
   resources :groups do
     resource :timer, only: [:show, :create]
   end

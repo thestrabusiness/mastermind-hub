@@ -1,2 +1,7 @@
-= @group.name
-= @group.facilitator.full_name
+.title
+  = @group.name
+  = @group.facilitator.full_name
+.primary-list
+  - @group.calls.each do |call|
+    = call.scheduled_on
+    = link_to "View", call_path(call)

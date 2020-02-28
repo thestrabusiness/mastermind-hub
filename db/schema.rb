@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_205148) do
+ActiveRecord::Schema.define(version: 2020_02_28_154126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "calls", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "scheduled_on", null: false
+    t.bigint "group_id", null: false
+    t.index ["group_id"], name: "index_calls_on_group_id"
+    t.index ["scheduled_on"], name: "index_calls_on_scheduled_on"
+  end
 
   create_table "group_invites", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -42,6 +51,16 @@ ActiveRecord::Schema.define(version: 2020_02_27_205148) do
     t.index ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id"
     t.index ["group_id"], name: "index_memberships_on_group_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "call_id", null: false
+    t.string "body", null: false
+    t.bigint "author_id", null: false
+    t.index ["author_id"], name: "index_notes_on_author_id"
+    t.index ["call_id"], name: "index_notes_on_call_id"
   end
 
   create_table "timers", force: :cascade do |t|

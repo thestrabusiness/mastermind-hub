@@ -2,7 +2,7 @@
   - if @groups.length > 0
     - @groups.each do |group|
       .list-item
-        = group.name
+        = link_to group.name, group_path(group)
         = link_to "Timer", group_timer_path(group)
 
   - else
