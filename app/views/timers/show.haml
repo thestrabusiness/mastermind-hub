@@ -22,7 +22,7 @@
             = form.select :duration, options_for_select(Timer.duration_select_options)
           .form-field
             = form.label :user_id
-            = form.select :user_id, options_for_select(User.select_options)
+            = form.select :user_id, options_for_select(@group.user_select_options)
           = form.submit
 
 %audio#timer_alert{src: "http://static1.grsites.com/archive/sounds/musical/musical009.mp3", controls: false}
