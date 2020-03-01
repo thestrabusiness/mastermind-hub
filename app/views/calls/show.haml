@@ -1,5 +1,6 @@
 .title
-  = @call.scheduled_on
+  Call on 
+  = @call.scheduled_on.strftime('%A, %B %e at %l %p %Z')
 .primary-list#notes_container{data: {call_id: @call.id}}
   - @call.notes.each do |note|
     .list_item

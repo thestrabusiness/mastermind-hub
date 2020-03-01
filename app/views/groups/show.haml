@@ -3,5 +3,5 @@
   = @group.facilitator.full_name
 .primary-list
   - @group.calls.each do |call|
-    = call.scheduled_on
+    = call.scheduled_on.strftime('%A, %B %e at %l %p %Z')
     = link_to "View", call_path(call)
