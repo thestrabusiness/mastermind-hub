@@ -1,13 +1,14 @@
 .body
-  You've been added to the mastermind group
-  = @invite.group.name
-  by
-  = @user.full_name
+  %p 
+    You've been added to the mastermind group
+    = @invite.group.name
+    by
+    = @user.full_name
 
-  If you already have an account, sign in to accept:
+  %p If you already have an account, sign in to accept:
 
-  = link_to "Sign In", sign_in_url
+  %p = link_to "Sign In", sign_in_url
 
-  Don't have an account? Sign up below:
+  %p Don't have an account? Sign up below:
 
-  = link_to "Sign Up", sign_up_url
+  %p = link_to "Sign Up", sign_up_url

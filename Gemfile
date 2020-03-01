@@ -5,6 +5,7 @@ ruby '2.7.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clearance'
+gem 'dotenv-rails'
 gem 'factory_bot_rails'
 gem 'haml'
 gem 'haml-rails'
