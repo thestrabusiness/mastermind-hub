@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
   end
 
   def emails
-    params.fetch(:emails)&.strip&.split(',') || []
+    params.fetch(:emails)&.split(',') || []
   end
 
   def create_membership
@@ -39,7 +39,7 @@ class GroupsController < ApplicationController
 
   def invite_users
     emails.each do |email|
-      GroupInviter.perform(email, @group, current_user)
+      GroupInviter.perform(email.strip, @group, current_user)
     end
   end
 end
