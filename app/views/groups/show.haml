@@ -1,7 +1,13 @@
-.title
-  = @group.name
-  = @group.facilitator.full_name
-.primary-list
-  - @group.calls.each do |call|
-    = call.scheduled_on.strftime('%A, %B %e at %l %p %Z')
-    = link_to "View", call_path(call)
+.centered-content.column
+  .title
+    = @group.name
+  .details
+    %p
+      Created by:
+      = @group.facilitator.full_name
+
+  .sub-title Calls:
+  .primary-list
+    - @group.calls.each do |call|
+      = call.scheduled_on.strftime('%A, %B %e at %l %p %Z')
+      = link_to "View", call_path(call)

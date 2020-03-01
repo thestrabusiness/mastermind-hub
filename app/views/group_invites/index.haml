@@ -1,9 +1,16 @@
-.primary-list
-  - @group_invites.each do |invite|
-    .list-item
-      = invite.created_at
-      = invite.group.name
+.centered-content.column
+  .title
+    Pending invites
+  .primary-list
+    - @group_invites.each do |invite|
+      .list-item
+        = invite.created_at.strftime('%m/%d/%y')
+        = invite.group.name
 
-      .actions
-        = link_to "Accept", accept_group_invite_path(invite), method: :post
-        = link_to "Reject", reject_group_invite_path(invite), method: :post
+        .actions
+          = link_to "Accept", accept_group_invite_path(invite), method: :post
+          = link_to "Reject", reject_group_invite_path(invite), method: :post
+
+    - if @group_invites.empty?
+      .list-item
+        You don't have any pending invites
