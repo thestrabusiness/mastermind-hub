@@ -4,8 +4,8 @@ RSpec.feature 'User views group details page' do
   it 'renders a list of previous calls' do
     user = create(:user, :facilitator)
     group = user.groups.first
-    create(:call, group: group, scheduled_on: 7.days.ago)
     create(:call, group: group, scheduled_on: 14.days.ago)
+    create(:call, group: group, scheduled_on: 7.days.ago)
 
     visit group_path(group, as: user)
 

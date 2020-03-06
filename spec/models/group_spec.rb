@@ -4,9 +4,9 @@ RSpec.describe Group do
   describe 'next call' do
     it 'returns the next call scheduled after the given one' do
       group = create(:group)
+      future_call = create(:call, group: group, scheduled_on: 7.days.from_now)
       past_call = create(:call, group: group, scheduled_on: 7.days.ago)
       todays_call = create(:call, group: group)
-      future_call = create(:call, group: group, scheduled_on: 7.days.from_now)
 
       expect(group.next_call(past_call)).to eq todays_call
       expect(group.next_call(todays_call)).to eq future_call
