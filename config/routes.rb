@@ -7,10 +7,11 @@ Rails.application.routes.draw do
     root to: 'sessions#new'
   end
 
-
   resources :calls, only: :show do
     resource :note, only: :create
+    resources :commitments, only: :create
   end
+
   resources :groups do
     resource :timer, only: [:show, :create]
   end

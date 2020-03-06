@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_28_154126) do
+ActiveRecord::Schema.define(version: 2020_03_06_135435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 2020_02_28_154126) do
     t.bigint "group_id", null: false
     t.index ["group_id"], name: "index_calls_on_group_id"
     t.index ["scheduled_on"], name: "index_calls_on_scheduled_on"
+  end
+
+  create_table "commitments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "completed", default: false, null: false
+    t.string "body", null: false
+    t.bigint "membership_id", null: false
+    t.bigint "call_id", null: false
+    t.index ["call_id"], name: "index_commitments_on_call_id"
+    t.index ["completed"], name: "index_commitments_on_completed"
+    t.index ["membership_id", "call_id"], name: "index_commitments_on_membership_id_and_call_id", unique: true
+    t.index ["membership_id"], name: "index_commitments_on_membership_id"
   end
 
   create_table "group_invites", force: :cascade do |t|
@@ -41,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_02_28_154126) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
     t.bigint "creator_id", null: false
+    t.integer "call_day", default: 0, null: false
+    t.time "call_time", default: "2000-01-01 00:00:00", null: false
     t.index ["creator_id"], name: "index_groups_on_creator_id"
   end
 

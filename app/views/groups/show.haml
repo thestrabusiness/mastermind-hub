@@ -6,8 +6,14 @@
       Created by:
       = @group.facilitator.full_name
 
-  .sub-title Calls:
+  - if @group.todays_call.present?
+    = render 'call_details', title: "Today's call", call: @group.todays_call
+  - else
+    = render 'call_details', title: "Upcoming call", call: @group.upcoming_call
+
+  .sub-title Previous calls:
   .primary-list
-    - @group.calls.each do |call|
-      = call.scheduled_on.strftime('%A, %B %e at %l %p %Z')
-      = link_to "View", call_path(call)
+    - @group.previous_calls.each do |call|
+      .list-item
+        = DateFormatter.month_day_time(call.scheduled_on)
+        = link_to "View", call_path(call)

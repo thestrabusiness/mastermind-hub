@@ -1,0 +1,12 @@
+%h2= title
+.primary-list
+  - if commitments.empty?
+    .list-item
+      = empty_message
+  - commitments.each do |commitment|
+    .list-item
+      = commitment.user.full_name
+      = commitment.body
+      - if show_completed
+        = commitment.completed?
+

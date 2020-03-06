@@ -34,4 +34,19 @@ FactoryBot.define do
     sequence(:email) { |n| "email#{n}@example.com" }
     association :group
   end
+
+  factory :call do
+    scheduled_on { Time.current }
+    association :group
+  end
+
+  factory :commitment do
+    body { 'I commit to doing a thing' }
+    association :membership
+
+    trait :completed do
+      completed { true }
+    end
+  end
+
 end

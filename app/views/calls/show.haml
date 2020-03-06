@@ -1,15 +1,43 @@
-.title
-  Call on 
-  = @call.scheduled_on.strftime('%A, %B %e at %l %p %Z')
-.primary-list#notes_container{data: {call_id: @call.id}}
-  - @call.notes.each do |note|
-    .list_item
-      = note.author.full_name
-      = note.body
+.centered-content.column
+  .title
+    -if @page.viewing_todays_call?
+      Today's Call:
+    - else
+      Call on:
+    = DateFormatter.month_day_time(@page.call.scheduled_on)
 
-.form
-  .title Add a note
-  = form_for Note.new, url: call_note_path(@call) do |form|
-    .form-field
-      = form.text_area :body
-    = form.submit
+  -if @page.last_weeks_call
+    = render 'commitments',
+      title:"Last Week's Commitments",
+      commitments: @page.last_weeks_call.commitments,
+      empty_message: "There were no commitments for the last call",
+      show_completed: true
+
+  - if @page.viewing_todays_call?
+    = render 'commitments',
+      title:"This week we're committing to...",
+      commitments: @page.next_call.commitments,
+      empty_message: "No one has added any commitments yet",
+      show_completed: false
+
+    - unless @page.viewer_added_commitment?(current_user)
+      .form#commitment_form
+        .title Add your commitment for the coming week
+        = form_with model: [@page.next_call, Commitment.new] do |form|
+          .form-field
+            = form.text_field :body
+          = form.submit
+
+  %h2 Notes
+  .primary-list#notes_container{data: {call_id: @page.call.id}}
+    - @page.notes.each do |note|
+      .list-item
+        = note.author.full_name
+        = note.body
+
+  .form#note_form
+    .title Add a note
+    = form_with model: [@page.call, Note.new], url: call_note_path(@page.call) do |form|
+      .form-field
+        = form.text_area :body
+      = form.submit
