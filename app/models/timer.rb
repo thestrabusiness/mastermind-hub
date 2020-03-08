@@ -10,11 +10,23 @@ class Timer < ApplicationRecord
     DURATION_RANGE.map { |minutes| [minutes, minutes * 60] }
   end
 
+  def ended?
+    ends_at <= Time.current
+  end
+
   def ends_at
     created_at + duration
   end
 
   def ends_at_for_js
     ends_at.strftime('%B %d, %Y %H:%M:%S UTC')
+  end
+
+  def initial_text
+    if ended?
+      'TIMES UP'
+    else
+      '00m 00s'
+    end
   end
 end

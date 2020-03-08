@@ -19,6 +19,7 @@ document.addEventListener("turbolinks:load", ()=>{
 
         received(data) {
           const node = document.createElement("div")
+          node.className = "list-item";
           const textNode = document.createTextNode(`${data.author} ${data.body}`)
           node.appendChild(textNode)
           notesContainer.appendChild(node);

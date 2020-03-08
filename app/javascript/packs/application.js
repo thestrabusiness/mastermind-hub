@@ -19,7 +19,7 @@ require("channels")
 //
 
 document.addEventListener("turbolinks:load", () => {
-  const timer = document.querySelector(".timer");
+  const timer = document.querySelector("#timer");
 
   if (timer) {
     const endTime = new Date(timer.getAttribute("data-timer-end")).getTime();

@@ -128,8 +128,7 @@ RSpec.feature 'User views call details page', js: true do
 
       visit call_path(timer.call, as: user)
 
-      expect(page)
-        .to have_content "Time left for #{timer.user.first_plus_initial}"
+      expect(page).to have_content timer.user.first_plus_initial
     end
   end
 
@@ -163,7 +162,7 @@ RSpec.feature 'User views call details page', js: true do
       select user.full_name, from: :timer_user_id
       click_on 'Create Timer'
 
-      expect(page).to have_content "Time left for #{user.first_plus_initial}"
+      expect(page).to have_content user.first_plus_initial
     end
   end
 

@@ -1,12 +1,23 @@
-%h2= title
-.primary-list
-  - if commitments.empty?
-    .list-item
-      = empty_message
-  - commitments.each do |commitment|
-    .list-item
-      = commitment.user.full_name
-      = commitment.body
-      - if show_completed
-        = commitment.completed?
+.card
+  .card-title
+    = title
+  .primary-list.card-content
+    - if commitments.empty?
+      .list-item
+        = empty_message
+    - commitments.each do |commitment|
+      .list-item
+        = commitment.user.full_name
+        = commitment.body
+        - if show_completed
+          = commitment.completed?
+
+  .card-footer
+    - if show_form
+      #commitment_form
+        .title I'm committing to
+        = form_with model: [@page.next_call, Commitment.new], remote: true do |form|
+          .form-field
+            = form.text_field :body
+          = form.submit
 

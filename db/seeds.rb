@@ -21,9 +21,23 @@ eric = User.create!(
   last_name: 'Test'
 )
 
+joe = User.create!(
+  email: 'Joe@example.com',
+  password: 'password',
+  first_name: 'Joe',
+  last_name: 'Test'
+)
+
+tad = User.create!(
+  email: 'Tad@example.com',
+  password: 'password',
+  first_name: 'Tad',
+  last_name: 'Test'
+)
+
 group = Group.create!(name: 'Fellas', creator: anthony, call_time: '16:00')
 group.memberships.create!(user: anthony, role: Membership::FACILITATOR)
-group.users << [kurt, eric]
+group.users << [kurt, eric, tad, joe]
 
 last_call = group.calls.create!(scheduled_on: Date.today - 7.days)
 todays_call = group.calls.create!(scheduled_on: Date.today)

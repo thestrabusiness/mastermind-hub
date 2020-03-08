@@ -7,7 +7,7 @@ class NotesController < ApplicationController
       CallNotesChannel.broadcast_to @call, serialized_note
     end
 
-    redirect_to @call
+    render json: @note
   end
 
   private

@@ -19,12 +19,12 @@ class CallPage
     @group.next_call(@call) || @group.upcoming_call
   end
 
-  def viewer_added_commitment?(viewer)
-    next_call.commitments.any? { |c| c.membership.user == viewer }
-  end
-
   def viewer_is_facilitator?(viewer)
     @group.facilitator == viewer
+  end
+
+  def viewer_added_commitment?(viewer)
+    next_call.commitments.any? { |c| c.membership.user == viewer }
   end
 
   def notes

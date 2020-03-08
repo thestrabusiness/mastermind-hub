@@ -1,11 +1,14 @@
 @import 'layout';
 @import 'list';
-@import 'timer';
 @import 'form';
 @import 'navbar';
+@import 'card';
+@import 'call_details';
 
 body {
   margin: 0;
+  font-family: sans-serif;
+  background: #f6f2ef;
 }
 
 .main-content {
