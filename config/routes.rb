@@ -8,13 +8,12 @@ Rails.application.routes.draw do
   end
 
   resources :calls, only: :show do
-    resource :note, only: :create
     resources :commitments, only: :create
+    resource :note, only: :create
+    resource :timer, only: :create
   end
 
-  resources :groups do
-    resource :timer, only: [:show, :create]
-  end
+  resources :groups
 
   resources :group_invites do
     member do

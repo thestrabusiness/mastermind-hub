@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def first_plus_initial
     "#{first_name} #{last_name[0]}."
   end
+
+  def in_group?(group)
+    groups.includes(group)
+  end
 end

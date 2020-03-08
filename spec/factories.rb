@@ -27,7 +27,7 @@ FactoryBot.define do
 
   factory :timer do
     association :user
-    association :group
+    association :call
   end
 
   factory :group_invite do

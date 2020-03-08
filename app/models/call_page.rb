@@ -1,9 +1,10 @@
 class CallPage
-  attr_reader :call
+  attr_reader :call, :group, :timer
 
   def initialize(call)
     @call = call
     @group = call.group
+    @timer = call.timers.last
   end
 
   def viewing_todays_call?
@@ -20,6 +21,10 @@ class CallPage
 
   def viewer_added_commitment?(viewer)
     next_call.commitments.any? { |c| c.membership.user == viewer }
+  end
+
+  def viewer_is_facilitator?(viewer)
+    @group.facilitator == viewer
   end
 
   def notes

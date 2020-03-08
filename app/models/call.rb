@@ -1,7 +1,8 @@
 class Call < ApplicationRecord
   belongs_to :group
-  has_many :notes
   has_many :commitments
+  has_many :notes
+  has_many :timers
 
   default_scope { order(scheduled_on: :asc) }
 

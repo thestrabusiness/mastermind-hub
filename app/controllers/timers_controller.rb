@@ -1,35 +1,31 @@
 class TimersController < ApplicationController
   before_action :require_login
-  before_action :load_and_authorize_group
+  before_action :load_and_authorize_call
   before_action :check_role, only: :create
 
-  def show
-    @timer = @group.timers.last
-  end
-
   def create
-    @timer = @group.timers.create(timer_params)
+    @timer = @call.timers.create(timer_params)
 
     if @timer.persisted?
       ActionCable.server.broadcast 'timer_channel', @timer.as_json
     end
 
-    render :show
+    redirect_to call_path(@call)
   end
 
   private
 
-  def load_and_authorize_group
-    @group = Group.find(params[:group_id])
+  def load_and_authorize_call
+    @call = Call.find(params[:call_id])
 
-    if !current_user.groups.includes(@group)
+    if !current_user.in_group?(@call.group)
       redirect_to groups_path
     end
   end
 
   def check_role
-    if @group.facilitator != current_user
-      redirect_to timer_path
+    if @call.group.facilitator != current_user
+      redirect_to call_path(@call)
     end
   end
 
