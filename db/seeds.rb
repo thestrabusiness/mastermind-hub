@@ -26,11 +26,11 @@ group.memberships.create!(user: anthony, role: Membership::FACILITATOR)
 group.users << [kurt, eric]
 
 last_call = group.calls.create!(scheduled_on: Date.today - 7.days)
-group.calls.create!(scheduled_on: Date.today)
+todays_call = group.calls.create!(scheduled_on: Date.today)
 
 group.memberships.each do |member|
   body = "#{member.user.first_name}'s commitment"
   last_call.commitments.create!(membership: member, body: body)
 end
 
-Timer.create!(user: kurt, group: group)
+Timer.create!(user: kurt, call: todays_call)
