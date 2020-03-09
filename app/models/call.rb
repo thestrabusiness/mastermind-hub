@@ -17,4 +17,8 @@ class Call < ApplicationRecord
   def self.on(date)
     where('scheduled_on::DATE = ?', date)
   end
+
+  def previous_call
+    Call.before(scheduled_on).last
+  end
 end

@@ -12,7 +12,7 @@ class CallPage
   end
 
   def last_weeks_call
-    @group.previous_calls.last
+    @call.previous_call
   end
 
   def next_call
