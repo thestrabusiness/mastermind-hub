@@ -24,6 +24,10 @@
   .card-footer {
     flex: 2;
   }
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .card-large {
@@ -41,4 +45,14 @@
   .card-footer {
     flex: 1;
   }
+}
+
+.card-square {
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+  min-height: 125px;
+  height: 125px;
+  width: 125px;
+  margin: 5px;
 }

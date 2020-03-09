@@ -9,7 +9,9 @@ RSpec.feature 'User views group details page' do
 
     visit group_path(group, as: user)
 
-    expect(page).to have_selector('.list-item').twice
+    within("#previous_calls") do
+      expect(page).to have_selector('.list-item').twice
+    end
   end
 
   context 'when there is no call today' do

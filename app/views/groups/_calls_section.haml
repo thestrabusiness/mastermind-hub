@@ -1,0 +1,12 @@
+.section{id: section_id}
+  .subtitle= title
+  .card-list
+    - calls.each do |call|
+      = link_to call_path(call) do
+        .list-item.card.card-square
+          .day
+            = DateFormatter.day(call.scheduled_on)
+          .month
+            = DateFormatter.small_month_day(call.scheduled_on)
+          .time
+            = DateFormatter.time(call.scheduled_on)
