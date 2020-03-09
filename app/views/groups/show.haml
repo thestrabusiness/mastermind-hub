@@ -13,7 +13,7 @@
 
   .sub-title Previous calls:
   .primary-list
-    - @group.previous_calls.each do |call|
+    - @previous_calls.each do |call|
       .list-item
         = DateFormatter.month_day_time(call.scheduled_on)
         = link_to "View", call_path(call)

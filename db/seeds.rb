@@ -41,6 +41,7 @@ group.users << [kurt, eric, tad, joe]
 
 last_call = group.calls.create!(scheduled_on: Date.today - 7.days)
 todays_call = group.calls.create!(scheduled_on: Date.today)
+group.calls.create!(scheduled_on: Date.today - 14.days)
 
 group.memberships.each do |member|
   body = "#{member.user.first_name}'s commitment"

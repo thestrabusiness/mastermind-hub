@@ -22,7 +22,8 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
+    @group = Group.includes(:calls).find(params[:id])
+    @previous_calls = @group.previous_calls.reorder(scheduled_on: :desc)
   end
 
   private
