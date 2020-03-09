@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def in_group?(group)
     groups.includes(group)
   end
+
+  def initials
+    "#{first_name[0]}#{last_name[0]}".upcase
+  end
 end

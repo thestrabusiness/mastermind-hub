@@ -1,11 +1,20 @@
 .centered-content.column
   .title
     Your groups
-  .primary-list
+  .new-record-button
+    = link_to "Start a group", new_group_path
+  .card-list
     - if @groups.length > 0
       - @groups.each do |group|
-        .list-item
-          = link_to group.name, group_path(group)
+        = link_to group_path(group) do
+          .list-item.card.card-small
+            .card-title= group.name
+            .card-content
+              = group.memberships.count
+              members
+            .card-footer.row
+              - group.users.each do |user|
+                .avatar= user.initials
 
     - else
       %p.no-records-message
@@ -14,5 +23,3 @@
       %p.no-records-message
         Take a look at your invites or start your own.
 
-    .new-group-button
-      = link_to "Start a group", new_group_path
