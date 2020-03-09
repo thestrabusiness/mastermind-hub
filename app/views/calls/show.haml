@@ -8,72 +8,8 @@
       = DateFormatter.month_day_time(@page.call.scheduled_on)
 
     .column.column-left
-      - if @page.last_weeks_call.present?
-        = render 'commitments',
-          title: "Last Week's Commitments",
-          commitments: @page.last_weeks_call.commitments,
-          empty_message: "There were no commitments for the last call",
-          show_completed: true,
-          show_form: false
-
-      - if @page.viewing_todays_call?
-        = render 'commitments',
-          title:"This week we're committing to...",
-          commitments: @page.next_call.commitments,
-          empty_message: "No one has added any commitments yet",
-          show_completed: false,
-          show_form: !@page.viewer_added_commitment?(current_user)
-
-      - else 
-        = render 'commitments',
-          title: 'This week we committed to...',
-          commitments: @page.call.commitments,
-          empty_message: "No one added any commitments to this call",
-          show_completed: true,
-          show_form: false
+      = render 'commitment_cards'
 
     .column.column-right
-      .card.timer
-        .card-title Timer
-        .card-content
-          .timer-details
-            - if @page.timer.nil?
-              .timer-name
-                No timer started yet
-
-            - if @page.timer.present?
-              .timer-name
-                = @page.timer.user.first_plus_initial
-
-              .timer-container
-                #timer{data: {timer_end: @page.timer.ends_at_for_js}}
-                  = @page.timer.initial_text
-
-        .card-footer
-          - if @page.viewer_is_facilitator?(current_user)
-            .timer-controls
-              = form_for Timer.new, url: call_timer_path(@page.call, @page.timer) do |form|
-                .form-field
-                  = form.label :duration
-                  = form.select :duration, options_for_select(Timer.duration_select_options)
-                .form-field
-                  = form.label :user_id
-                  = form.select :user_id, options_for_select(@page.group.user_select_options)
-                = form.submit
-
-      .card.card-large
-        .card-title Notes
-        .primary-list.card-content#notes_container{data: {call_id: @page.call.id}}
-          - @page.notes.each do |note|
-            .list-item
-              = note.author.full_name
-              = note.body
-
-        .form.card-footer#note_form
-          .title Add a note
-          = form_with model: [@page.call, Note.new], url: call_note_path(@page.call) do |form|
-            .form-field
-              = form.text_area :body
-            = form.submit
-
-  %audio#timer_alert{src: "http://static1.grsites.com/archive/sounds/musical/musical009.mp3", controls: false}
+      = render 'timer_card'
+      = render 'notes_card'
