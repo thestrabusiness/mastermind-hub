@@ -20,3 +20,16 @@
   flex-direction: column;
   margin-bottom: 15px;
 }
+
+form.inline {
+  display: flex;
+
+  .form-field {
+    margin-right: 10px;
+  }
+}
+
+.inline-edit-link {
+  text-decoration: none;
+  color: black;
+}

@@ -5,18 +5,28 @@
     - if commitments.empty?
       .list-item
         = empty_message
-    - commitments.each do |commitment|
-      .list-item
-        = commitment.user.full_name
-        = commitment.body
-        - if show_completed
-          = commitment.completed?
+    - commitments.sort_by(&:membership_id).each do |commitment|
+      .list-item.space-between
+        - if current_user == commitment.user
+          = render 'editable_commitment_body', commitment: commitment
+        - else
+          = render 'commitment_body', commitment: commitment
+
+        .completion
+          - if show_completed && !@page.viewer_can_update_commitment?(commitment)
+            = octicon @page.commitment_icon(commitment)
+
+          - if show_completion_links && @page.viewer_can_update_commitment?(commitment)
+            = link_to call_commitment_path(commitment.call, commitment, @page.commitment_param(commitment)),
+                method: :patch do
+              = octicon @page.commitment_icon(commitment)
+
 
   .card-footer
     - if show_form
       #commitment_form
         .title I'm committing to
-        = form_with model: [@page.next_call, Commitment.new], remote: true do |form|
+        = form_with model: [@page.call, Commitment.new], remote: true do |form|
           .form-field
             = form.text_field :body
           = form.submit

@@ -1,0 +1,6 @@
+document.getElementById('<%= dom_id(@commitment, 'inline_form') %>').remove()
+document
+  .getElementById('<%= dom_id(@commitment) %>')
+  .innerHTML = "<%= j render 'calls/commitment_body', commitment: @commitment %>"
+document.getElementById('<%= dom_id(@commitment) %>').style.display = 'block'
+document.getElementById('<%= dom_id(@commitment, 'pencil') %>').style.display = 'block'

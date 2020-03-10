@@ -13,7 +13,7 @@ RSpec.feature 'User views call details page', js: true do
 
     visit call_path(call, as: user)
 
-    expect(page).to have_content user.full_name
+    expect(page).to have_content user.first_name
     expect(page).to have_content commitment.body
   end
 
@@ -59,14 +59,11 @@ RSpec.feature 'User views call details page', js: true do
       end
     end
 
-    context 'and the user has added a commitment for next week' do
+    context 'and the user has added a commitment for this week' do
       it 'does not render the commitment form' do
         user = create(:user, :with_group)
         call = create(:call, group: user.groups.first)
-        next_call = create(:call,
-                           group: user.groups.first,
-                           scheduled_on: 7.days.from_now)
-        create(:commitment, call: next_call, membership: user.memberships.first)
+        create(:commitment, call: call, membership: user.memberships.first)
 
         visit call_path(call, as: user)
 
@@ -83,14 +80,11 @@ RSpec.feature 'User views call details page', js: true do
       expect(page).to have_content "Today's Call"
     end
 
-    it 'renders next week\'s commitments' do
+    it 'renders this week\'s commitments' do
       user = create(:user, :with_group)
       call = create(:call, group: user.groups.first)
-      next_call = create(:call,
-                         group: user.groups.first,
-                         scheduled_on: 7.days.from_now)
       commitment = create(:commitment,
-                          call: next_call,
+                          call: call,
                           membership: user.memberships.first)
 
       visit call_path(call, as: user)

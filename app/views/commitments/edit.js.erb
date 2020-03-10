@@ -1,0 +1,13 @@
+document
+  .getElementById('<%= dom_id(@commitment) %>')
+  .insertAdjacentHTML('afterend', "<%= j render 'inline_form', commitment: @commitment, call: @call %>")
+
+document
+  .getElementById('<%= dom_id(@commitment) %>')
+  .style
+  .display = 'none'
+
+document
+  .getElementById('<%= dom_id(@commitment, 'pencil') %>')
+  .style
+  .display = 'none'

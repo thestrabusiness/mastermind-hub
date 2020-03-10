@@ -15,7 +15,7 @@
             = @page.timer.initial_text
 
   .card-footer
-    - if @page.viewer_is_facilitator?(current_user)
+    - if @page.viewer_is_facilitator?
       .timer-controls
         = form_for Timer.new, url: call_timer_path(@page.call, @page.timer) do |form|
           .form-field

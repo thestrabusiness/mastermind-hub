@@ -1,39 +1,60 @@
 class CallPage
   attr_reader :call, :group, :timer
 
-  def initialize(call)
+  def initialize(call, current_user)
     @call = call
+    @viewer = current_user
     @group = call.group
     @timer = call.timers.last
   end
 
   def viewing_todays_call?
-    @call == todays_call
+    call == todays_call
   end
 
   def last_weeks_call
-    @call.previous_call
+    call.previous_call
   end
 
   def next_call
-    @group.next_call(@call) || @group.upcoming_call
+    group.next_call(call) || group.upcoming_call
   end
 
-  def viewer_is_facilitator?(viewer)
-    @group.facilitator == viewer
+  def viewer_is_facilitator?
+    group.facilitator == viewer
   end
 
-  def viewer_added_commitment?(viewer)
-    next_call.commitments.any? { |c| c.membership.user == viewer }
+  def viewer_added_commitment?
+    call.commitments.any? { |c| c.membership.user == viewer }
+  end
+
+  def viewer_can_update_commitment?(commitment)
+    viewer == commitment.user || viewer_is_facilitator?
   end
 
   def notes
-    @call.notes
+    call.notes
+  end
+
+  def commitment_param(commitment)
+    params = { commitment: { completed: true } }
+
+    if commitment.completed?
+      params[:commitment][:completed] = false
+    end
+
+    params
+  end
+
+  def commitment_icon(commitment)
+    commitment.completed ? 'check' : 'x'
   end
 
   private
 
+  attr_reader :viewer
+
   def todays_call
-    @group.todays_call
+    group.todays_call
   end
 end
