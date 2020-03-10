@@ -3,8 +3,16 @@
     Your groups
   .new-record-button
     = link_to "Start a group", new_group_path
-  .card-list
-    - if @groups.length > 0
+
+  - if @groups.empty?
+    %p.no-records-message
+      You don't belong to any groups yet.
+
+    %p.no-records-message
+      Take a look at your invites or start your own.
+
+  - else
+    .card-list
       - @groups.each do |group|
         = link_to group_path(group) do
           .list-item.card.card-small
@@ -16,10 +24,4 @@
               - group.users.each do |user|
                 .avatar= user.initials
 
-    - else
-      %p.no-records-message
-        You don't belong to any groups yet.
-
-      %p.no-records-message
-        Take a look at your invites or start your own.
 
