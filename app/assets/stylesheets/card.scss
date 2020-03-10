@@ -24,6 +24,7 @@
 
   .card-footer {
     flex: 2;
+    align-items: center;
 
     &.row{
       display: flex;
@@ -58,6 +59,7 @@
   height: 200px;
   width: 200px;
   margin: 5px;
+  padding: 20px;
 }
 
 .card-square {

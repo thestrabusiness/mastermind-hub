@@ -21,7 +21,7 @@
               = group.memberships.count
               members
             .card-footer.row
-              - group.users.each do |user|
+              - group.users.take(5).each do |user|
                 .avatar= user.initials
 
 
