@@ -1,12 +1,22 @@
+.sign-up,
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
+  form {
+    width: 400px;
+  }
+}
+
 .errors {
   color: red;
 }
 
-.form_field {
+.form-field {
   display: flex;
   flex-direction: column;
-
-  input {
-    width: 35%;
-  }
+  margin-bottom: 15px;
 }
