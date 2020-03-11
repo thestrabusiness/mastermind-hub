@@ -20,6 +20,10 @@ class CallPage
     call.previous_call
   end
 
+  def last_weeks_commitments
+    last_weeks_call.commitments.includes(membership: :user)
+  end
+
   def next_call
     group.next_call(call) || group.upcoming_call
   end
