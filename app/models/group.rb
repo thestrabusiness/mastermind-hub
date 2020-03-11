@@ -21,7 +21,7 @@ class Group < ApplicationRecord
     existing_call = calls.after(Date.today).first
 
     if existing_call.nil?
-      return calls.create(scheduled_on: next_call_day)
+      return calls.create(scheduled_on: next_call_date)
     end
 
     existing_call
@@ -45,7 +45,11 @@ class Group < ApplicationRecord
 
   private
 
-  def next_call_day
-    Chronic.parse("next week #{call_day}")
+  def next_call_date
+    if call_day_before_type_cast == Date.today.wday
+      Chronic.parse("next week #{call_day}")
+    else
+      Chronic.parse("this #{call_day}")
+    end
   end
 end
