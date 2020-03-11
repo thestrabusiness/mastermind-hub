@@ -7,7 +7,7 @@
     show_completion_links: true,
     show_form: false
 
-- if @page.viewing_todays_call?
+- if @page.viewing_todays_call? || @page.viewing_upcoming_call?
   = render 'commitments',
     title:"This week we're committing to...",
     commitments: @page.call.commitments,

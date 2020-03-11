@@ -12,6 +12,10 @@ class CallPage
     call == todays_call
   end
 
+  def viewing_upcoming_call?
+    call.scheduled_on > Date.current
+  end
+
   def last_weeks_call
     call.previous_call
   end

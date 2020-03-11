@@ -5,7 +5,7 @@ class CommitmentsController < ApplicationController
     @call = Call.find(params[:call_id])
     @call.commitments.create(create_commitment_params)
 
-    redirect_to call_path(@call.group.todays_call)
+    redirect_to call_path(@call)
   end
 
   def edit
