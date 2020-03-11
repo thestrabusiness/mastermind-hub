@@ -20,7 +20,7 @@ class CommitmentsController < ApplicationController
 
     respond_to do |format|
       format.js {}
-      format.html { redirect_to call_path(@call.group.todays_call) }
+      format.html { redirect_to call_path(@call.next_call) }
     end
   end
 

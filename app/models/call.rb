@@ -22,6 +22,10 @@ class Call < ApplicationRecord
     Call.before(scheduled_on).last
   end
 
+  def next_call
+    Call.after(scheduled_on).first
+  end
+
   def todays_call?
     self == group.todays_call
   end
