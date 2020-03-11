@@ -1,8 +1,5 @@
-= render 'commitment_body', commitment: commitment
-
 = link_to edit_call_commitment_path(commitment.call, commitment),
     id: dom_id(commitment, 'pencil'),
     data: { confirm: ('This is a past commitment. Are you sure you want to edit it?' if !commitment.call.todays_call?) },
     remote: true do
   = octicon 'pencil'
-

@@ -7,12 +7,13 @@
         = empty_message
     - commitments.sort_by(&:membership_id).each do |commitment|
       .list-item.space-between
-        - if current_user == commitment.user
-          = render 'editable_commitment_body', commitment: commitment
-        - else
+        .commitment-body{id: dom_id(commitment)}
           = render 'commitment_body', commitment: commitment
 
         .completion
+          - if current_user == commitment.user
+            = render 'edit_commitment_link', commitment: commitment
+
           - if show_completed && !@page.viewer_can_update_commitment?(commitment)
             = octicon @page.commitment_icon(commitment)
 
