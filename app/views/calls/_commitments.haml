@@ -20,7 +20,9 @@
           - if show_completion_links && @page.viewer_can_update_commitment?(commitment)
             = link_to call_commitment_path(commitment.call, commitment, @page.commitment_param(commitment)),
                 method: :patch do
-              = octicon @page.commitment_icon(commitment)
+
+              = octicon @page.commitment_icon(commitment),
+                class: @page.icon_class(commitment)
 
 
   .card-footer

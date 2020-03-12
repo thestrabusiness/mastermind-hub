@@ -58,6 +58,10 @@ class CallPage
     commitment.completed ? 'check' : 'x'
   end
 
+  def icon_class(commitment)
+    commitment.completed ? 'green' : 'red'
+  end
+
   private
 
   attr_reader :viewer
