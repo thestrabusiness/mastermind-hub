@@ -1,5 +1,6 @@
 .sign-up,
-.sign-in {
+.sign-in,
+.new-group{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +8,11 @@
   height: 80vh;
 
   form {
+    padding: 20px;
     width: 400px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    background: white;
   }
 }
 
@@ -19,6 +24,11 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+
+  .select-field-row {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 form.inline {

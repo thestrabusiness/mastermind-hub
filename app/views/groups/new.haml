@@ -1,10 +1,22 @@
-= form_for @group do |form|
-  .form-field
-    = form.label :name
-    = form.text_field :name
+.new-group
+  %h2 Add a new group
+  = form_for @group do |form|
+    .form-field
+      = form.label :name
+      = form.text_field :name
 
-  .form-field
-    = label_tag :emails
-    = text_field_tag :emails
+    .form-field
+      = form.label :call_day, "Default call day"
+      = form.select :call_day,
+        options_for_select(Group.call_days.map { |k,v| [ k.capitalize, v] })
 
-  = form.submit
+    .form-field
+      = form.label :call_time, "Default call time"
+      .select-field-row
+        = form.time_select :call_time, minute_step: 10, ampm: true
+
+    .form-field
+      = label_tag :emails
+      = text_field_tag :emails
+
+    = form.submit
