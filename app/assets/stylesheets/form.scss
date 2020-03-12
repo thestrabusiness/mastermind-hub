@@ -33,9 +33,22 @@
 
 form.inline {
   display: flex;
+  width: 100%;
 
   .form-field {
     margin-right: 10px;
+
+    &.full-width {
+      width: 100%;
+    }
+  }
+
+  &.centered {
+    align-items: center;
+  }
+
+  &.spaced {
+    justify-content: space-evenly;
   }
 }
 

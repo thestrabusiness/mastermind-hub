@@ -17,13 +17,17 @@
   .card-footer
     - if @page.viewer_is_facilitator?
       .timer-controls
-        = form_for Timer.new, url: call_timer_path(@page.call, @page.timer) do |form|
+        = form_for Timer.new,
+            url: call_timer_path(@page.call, @page.timer),
+            html: { class: 'inline spaced centered' } do |form|
+
           .form-field
             = form.label :duration
             = form.select :duration, options_for_select(Timer.duration_select_options)
           .form-field
             = form.label :user_id
             = form.select :user_id, options_for_select(@page.group.user_select_options)
+
           = form.submit
 
     %audio#timer_alert{src: "http://static1.grsites.com/archive/sounds/musical/musical009.mp3", controls: false}
