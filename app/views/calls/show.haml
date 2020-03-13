@@ -7,6 +7,9 @@
         Call on:
       = DateFormatter.month_day_time(@page.call.scheduled_on)
 
+    .back-link
+      = link_to "Back to #{@page.group.name}", group_path(@page.group)
+
     .column.column-left
       = render 'commitment_cards'
 

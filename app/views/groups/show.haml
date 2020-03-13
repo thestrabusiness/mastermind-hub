@@ -2,7 +2,10 @@
   .title
     = @group.name
 
-  %p
+  .top-link
+    = link_to "Back to groups", groups_path
+
+  .top-link
     Created by:
     = @group.facilitator.full_name
 

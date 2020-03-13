@@ -6,15 +6,17 @@
 .call-details-columns {
   display: grid;
   grid-gap: 20px;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 50px auto auto;
   grid-template-columns: 50% 50%;
   grid-template-areas:
     "title title"
-    "column-left column-right" ;
+    "links links"
+    "column-left column-right";
 
   .column {
     display: flex;
     flex-direction: column;
+    margin-top: -20px;
   }
 
   .column-left {
@@ -30,7 +32,15 @@
     align-self: center;
     justify-self: center;
   }
+
+  .back-link {
+    grid-area: links;
+    text-align: center;
+    margin-top: -20px;
+  }
 }
+
+
 
 .timer {
   display: flex;
