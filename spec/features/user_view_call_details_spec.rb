@@ -100,7 +100,9 @@ RSpec.feature 'User views call details page', js: true do
 
       visit call_path(call, as: user)
 
-      expect(page).to have_content 'No timer started yet'
+      within(".timer-details") do
+        expect(page).to have_content 'No timer started yet'
+      end
     end
   end
 
@@ -111,7 +113,9 @@ RSpec.feature 'User views call details page', js: true do
 
       visit call_path(timer.call, as: user)
 
-      expect(page.has_content?('TIMES UP')).to be true
+      within(".timer-details") do
+        expect(page.has_content?('TIMES UP')).to be true
+      end
     end
   end
 
@@ -122,7 +126,9 @@ RSpec.feature 'User views call details page', js: true do
 
       visit call_path(timer.call, as: user)
 
-      expect(page).to have_content timer.user.first_plus_initial
+      within(".timer-details") do
+        expect(page).to have_content timer.user.first_plus_initial
+      end
     end
   end
 
@@ -156,7 +162,9 @@ RSpec.feature 'User views call details page', js: true do
       select user.full_name, from: :timer_user_id
       click_on 'Create Timer'
 
-      expect(page).to have_content user.first_plus_initial
+      within(".timer-details") do
+        expect(page).to have_content user.first_plus_initial
+      end
     end
   end
 
