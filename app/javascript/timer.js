@@ -1,9 +1,21 @@
+document.addEventListener("turbolinks:load", () => {
+  const timer = document.querySelector("#timer");
+
+  if (timer) {
+    updateTimer(timer);
+  }
+})
+
 const updateTimer = (timer) => {
+  if (window.myInterval) { 
+    window.clearInterval(window.myInterval)
+  }
+
   const endTime = new Date(timer.getAttribute("data-timer-end")).getTime();
   const timerSound = document.getElementById("timer_alert")
   timerSound.volume = 0.6;
 
-  const interval = setInterval(()=>{
+  window.myInterval = setInterval(() => {
     const now = new Date().getTime()
     const distance = endTime - now;
     // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -17,7 +29,7 @@ const updateTimer = (timer) => {
     }
 
     if (distance < 0) {
-      clearInterval(interval);
+      window.clearInterval(window.myInterval);
       timer.innerHTML = "TIMES UP";
     }
   })
