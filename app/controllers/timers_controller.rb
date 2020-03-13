@@ -5,12 +5,12 @@ class TimersController < ApplicationController
 
   def create
     @timer = @call.timers.create(timer_params)
+    @page = CallPage.new(@call, current_user)
 
-    if @timer.persisted?
-      ActionCable.server.broadcast 'timer_channel', @timer.as_json
-    end
-
-    redirect_to call_path(@call)
+    ActionCable
+      .server
+      .broadcast "call_timer_#{@call.id}",
+                 { html: render(partial: 'calls/timer_card') }
   end
 
   private

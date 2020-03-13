@@ -1,20 +1,29 @@
 import consumer from "./consumer"
+import { updateTimer } from "../timer";
 
+document.addEventListener("turbolinks:load", () => {
+  let timerContainer = document.querySelector("#timer_container");
 
-consumer.subscriptions.create("TimerChannel", {
-  connected() {
-    // Called when the subscription is ready for use on the server
-  },
+  if (timerContainer) {
+    consumer.subscriptions.create({
+        channel: "TimerChannel",
+        call_id: timerContainer.getAttribute('data-call-id'),
+      }, {
 
-  disconnected() {
-    // Called when the subscription has been terminated by the server
-  },
+      connected() {
+        // Called when the subscription is ready for use on the server
+      },
 
-  received(data) {
-    const timerPage = document.querySelector(".timer-page");
-    // Called when there's incoming data on the websocket for this channel
-    if (timerPage) {
-      location.reload();
-    }
+      disconnected() {
+        // Called when the subscription has been terminated by the server
+      },
+
+      received(data) {
+        timerContainer.innerHTML = data.html;
+        const newTimer = document.querySelector("#timer")
+        updateTimer(newTimer)
+      }
+    });
   }
-});
+})
+

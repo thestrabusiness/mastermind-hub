@@ -14,5 +14,6 @@
       = render 'commitment_cards'
 
     .column.column-right
-      = render 'timer_card'
+      #timer_container{ data: { call_id: @page.call.id } }
+        = render 'timer_card'
       = render 'notes_card'

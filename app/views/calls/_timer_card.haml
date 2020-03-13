@@ -19,7 +19,8 @@
       .timer-controls
         = form_for Timer.new,
             url: call_timer_path(@page.call, @page.timer),
-            html: { class: 'inline spaced centered' } do |form|
+            html: { class: 'inline spaced centered' },
+            remote: true do |form|
 
           .form-field
             = form.label :duration
