@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(group_params)
+    @group = Group.new(create_group_params)
 
     if @group.save
       create_membership
@@ -22,14 +22,32 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     @previous_calls = @group.previous_calls.reorder(scheduled_on: :desc)
+  end
+
+  def edit
+    @group = current_user.groups.find(params[:id])
+  end
+
+  def update
+    @group = current_user.groups.find(params[:id])
+
+    if @group.update
+      redirect_to group_path(@group)
+    else
+      render :edit
+    end
   end
 
   private
 
+  def create_group_params
+    group_params.merge(creator: current_user)
+  end
+
   def group_params
-    params.require(:group).permit(:name).merge(creator: current_user)
+    params.require(:group).permit(:name, :call_day, :call_time)
   end
 
   def emails
