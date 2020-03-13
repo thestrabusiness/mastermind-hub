@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     root to: 'sessions#new'
   end
 
-  resources :calls, only: :show do
+  resources :calls, only: [:show, :edit, :update] do
     resources :commitments, except: :destroy
     resource :note, only: :create
     resource :timer, only: :create

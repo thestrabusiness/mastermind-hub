@@ -1,0 +1,13 @@
+.centered-form
+  %h2
+    Edit call on
+    = DateFormatter.month_day(@call.scheduled_on)
+
+  = form_with model: @call do |form|
+    .form-field
+      = form.label :scheduled_on
+      .select-field-row
+        = form.datetime_select :scheduled_on
+
+    .form-field
+      = form.submit
