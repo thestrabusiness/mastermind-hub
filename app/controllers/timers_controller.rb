@@ -6,10 +6,8 @@ class TimersController < ApplicationController
   def create
     @call.timers.create(timer_params)
     @page = CallPage.new(@call, current_user)
-
-    ActionCable
-      .server
-      .broadcast "call_timer_#{@call.id}", { html: render_timer_details }
+    BroadcastNewTimerJob.perform_now(@page)
+    redirect_to @call
   end
 
   private
@@ -30,9 +28,5 @@ class TimersController < ApplicationController
 
   def timer_params
     params.require(:timer).permit(:duration, :user_id)
-  end
-
-  def render_timer_details
-    render(partial: 'calls/timer_details', locals: { page: @page })
   end
 end
