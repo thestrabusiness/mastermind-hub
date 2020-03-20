@@ -6,14 +6,16 @@ class NotesController < ApplicationController
     if @note.persisted?
       CallNotesChannel.broadcast_to @call, serialized_note
     end
-
-    render json: @note
   end
 
   private
 
   def serialized_note
-    { body: @note.body, author: current_user.full_name }.as_json
+    {
+      body: @note.body,
+      author_id: @note.author_id,
+      author: current_user.full_name
+    }.as_json
   end
 
   def note_params

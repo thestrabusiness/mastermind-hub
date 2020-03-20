@@ -8,6 +8,7 @@ export default class extends Controller {
     const callNotesController = this;
     const notesContainer = this.element;
     const callId = notesContainer.getAttribute('data-call-id');
+    this.currentUserId = parseInt(notesContainer.getAttribute('data-current-user-id'));
 
     this.subscription = consumer.subscriptions.create({
         channel: "CallNotesChannel",
@@ -22,9 +23,10 @@ export default class extends Controller {
         // Called when the subscription has been terminated by the server
       },
 
-      received(data) {
-        callNotesController.appendNewMessage(data)
-        callNotesController.resetNoteForm();
+      received(message) {
+        if (message.author_id !== this.currentUserId) {
+          callNotesController.appendNewMessage(message)
+        }
       }
     });
   }
@@ -41,9 +43,5 @@ export default class extends Controller {
     newMessageNode.appendChild(textNode)
 
     this.listTarget.appendChild(newMessageNode);
-  }
-
-  resetNoteForm() {
-    this.textareaTarget.value = "";
   }
 }

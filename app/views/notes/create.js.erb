@@ -1,0 +1,6 @@
+document
+  .getElementById('notes_container')
+  .insertAdjacentHTML('beforeend', '<%= j render 'calls/note', note: @note %>')
+document
+  .getElementById('note_body')
+  .value = ""

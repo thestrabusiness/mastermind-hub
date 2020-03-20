@@ -1,14 +1,14 @@
-.card.card-large{data: { controller: 'call-notes', call_id: @page.call.id } }
+.card.card-large{data: { controller: 'call-notes', call_id: @page.call.id, current_user_id: current_user.id } }
   .card-title Notes
-  .primary-list.card-content{data: { target: 'call-notes.list' }}
+  .primary-list.card-content#notes_container{data: { target: 'call-notes.list' }}
     - @page.notes.each do |note|
-      .list-item
-        = note.author.full_name
-        = note.body
+      = render 'note', note: note
 
   .form.card-footer#note_form
     .title Add a note
-    = form_with model: [@page.call, Note.new], url: call_note_path(@page.call) do |form|
+    = form_with model: [@page.call, Note.new],
+        url: call_note_path(@page.call),
+        remote: true do |form|
       .form-field
         = form.text_area :body, data: { target: 'call-notes.textarea' }
       = form.submit
