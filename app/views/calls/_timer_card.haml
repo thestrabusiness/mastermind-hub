@@ -1,35 +1,10 @@
-.card.timer
+.card.timer{data: { controller:  'timer', call_id: @page.call.id  } }
   .card-title Timer
   .card-content
-    .timer-details
-      - if @page.timer.nil?
-        .timer-name
-          No timer started yet
-
-      - if @page.timer.present?
-        .timer-name
-          = @page.timer.user.first_plus_initial
-
-        .timer-container
-          #timer{data: {target: 'timer.countdown', timer_end: @page.timer.ends_at_for_js}}
-            = @page.timer.initial_text
-
+    = render 'timer_details', page: @page
   .card-footer
     - if @page.viewer_is_facilitator?
-      .timer-controls
-        = form_for Timer.new,
-            url: call_timer_path(@page.call, @page.timer),
-            html: { class: 'inline spaced centered' },
-            remote: true do |form|
-
-          .form-field
-            = form.label :duration
-            = form.select :duration, options_for_select(Timer.duration_select_options)
-          .form-field
-            = form.label :user_id
-            = form.select :user_id, options_for_select(@page.group.user_select_options)
-
-          = form.submit
+      = render 'timer_form', page: @page
 
     %audio{ data: { target: "timer.alert" }, |
       src: "http://static1.grsites.com/archive/sounds/musical/musical009.mp3", |

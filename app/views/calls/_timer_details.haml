@@ -1,0 +1,12 @@
+.timer-details{data: { target: 'timer.details' } }
+  - if page.timer.nil?
+    .timer-name
+      No timer started yet
+
+  - if page.timer.present?
+    .timer-name
+      = page.timer.user.first_plus_initial
+
+    .timer-container
+      #timer{data: {target: 'timer.countdown', timer_end: page.timer.ends_at_for_js}}
+        = page.timer.initial_text

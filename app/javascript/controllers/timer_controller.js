@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static targets = ['alert', 'countdown']
+  static targets = ['alert', 'countdown', 'details']
 
   initialize() { 
     this.alertTarget.volume = 0.4;
@@ -12,6 +12,7 @@ export default class extends Controller {
     let timerController = this;
     this.timerContainer = this.element;
     this.callId = this.timerContainer.getAttribute('data-call-id')
+
     this.updateTimer();
 
     this.subscription = consumer.subscriptions.create({
@@ -28,7 +29,7 @@ export default class extends Controller {
         },
 
         received(data) {
-          timerController.timerContainer.innerHTML = data.html;
+          timerController.detailsTarget.innerHTML = data.html;
           timerController.updateTimer();
         }
       });
