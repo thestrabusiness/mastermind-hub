@@ -12,7 +12,7 @@ export default class extends Controller {
 
     this.subscribeToCommitmentCreation();
 
-    if (this.commitmentCallId) { 
+    if (this.commitmentCallId) {
       this.subscribeToConfirmations();
     }
   }

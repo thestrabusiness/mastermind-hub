@@ -3,7 +3,7 @@
     = title
   .primary-list.card-content{data: { target: 'call-commitments.commitmentList' }, id: show_form && dom_id(@page.call, 'commitments')}
     - if commitments.empty?
-      .list-item#empty_message{data: {target: 'call-commitments.emptyMessage'}}
+      .list-item{data: {target: show_form && 'call-commitments.emptyMessage'}, id: show_form && 'empty_target'}
         = empty_message
     - commitments.sort_by(&:membership_id).each do |commitment|
       = render 'commitment',
