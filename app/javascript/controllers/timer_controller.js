@@ -13,7 +13,9 @@ export default class extends Controller {
     this.timerContainer = this.element;
     this.callId = this.timerContainer.getAttribute('data-call-id')
 
-    this.updateTimer();
+    if (this.hasCountdownTarget) { 
+      this.updateTimer();
+    }
 
     this.subscription = consumer.subscriptions.create({
           channel: "TimerChannel",
@@ -37,18 +39,18 @@ export default class extends Controller {
 
   disconnect() { 
     this.subscription.unsubscribe();
+    if (window.timerInterval) { 
+      window.clearInterval(window.timerInterval)
+    }
   }
 
 
   updateTimer() {
-    if (window.myInterval) { 
-      window.clearInterval(window.myInterval)
-    }
-
+    this.clearTimer();
     const timerEndData = this.countdownTarget.getAttribute('data-timer-end');
     const endTime = new Date(timerEndData).getTime();
 
-    window.myInterval = setInterval(() => {
+    window.timerInterval = setInterval(() => {
       const now = new Date().getTime()
       const distance = endTime - now;
       // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -62,9 +64,15 @@ export default class extends Controller {
       }
 
       if (distance < 0) {
-        window.clearInterval(window.myInterval);
+        this.clearTimer();
         this.countdownTarget.innerHTML = "TIMES UP";
       }
     })
   }
+
+    clearTimer() { 
+      if (window.timerInterval) { 
+        window.clearInterval(window.timerInterval)
+      }
+    }
 }
