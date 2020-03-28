@@ -19,11 +19,11 @@ class Call < ApplicationRecord
   end
 
   def previous_call
-    Call.before(scheduled_on).last
+    group.calls.before(scheduled_on).last
   end
 
   def next_call
-    Call.after(scheduled_on).first
+    group.calls.after(scheduled_on).first
   end
 
   def todays_call?
