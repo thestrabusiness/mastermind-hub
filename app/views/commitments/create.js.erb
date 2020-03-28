@@ -1,0 +1,18 @@
+let emptyMessage = document.getElementById('empty_message')
+
+if(emptyMessage){
+  emptyMessage.remove();
+}
+
+document
+  .getElementById('commitment_form')
+  .remove();
+
+document.getElementById('<%= dom_id(@call, 'commitments') %>')
+  .insertAdjacentHTML(
+    'beforeend',
+    '<%= j render 'calls/commitment',
+                  commitment: @commitment,
+                  viewer: current_user,
+                  show_completed: false  %>'
+  )

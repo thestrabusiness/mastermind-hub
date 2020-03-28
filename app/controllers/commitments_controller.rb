@@ -3,9 +3,13 @@ class CommitmentsController < ApplicationController
 
   def create
     @call = Call.find(params[:call_id])
-    @call.commitments.create(create_commitment_params)
+    @commitment = @call.commitments.create(create_commitment_params)
+    @page = CallPage.new(@call, current_user)
+    BroadcastNewCommitmentJob.perform_now(@call, @commitment, current_user)
 
-    redirect_to call_path(@call)
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   def edit

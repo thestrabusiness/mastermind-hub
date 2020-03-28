@@ -1,0 +1,12 @@
+.list-item.space-between{ data: { target: 'call-commitments.commitment' } }
+  .commitment-body{id: dom_id(commitment,'body')}
+    = render 'calls/commitment_body', commitment: commitment
+
+  .commitment-links
+    - if viewer == commitment.user
+      .edit
+        = render 'calls/edit_commitment_link', commitment: commitment
+
+    - if show_completed
+      .confirm
+        = commitment_confirmation_link(commitment) 

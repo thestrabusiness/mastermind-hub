@@ -1,23 +1,15 @@
-.card{data: { controller: 'call-commitments', call_id: commitments.first&.call_id } }
+.card{data: { controller: 'call-commitments', commitment_call_id: commitments.first&.call_id, call_id: @page.call.id, current_user_id: current_user.id } }
   .card-title
     = title
-  .primary-list.card-content
+  .primary-list.card-content{data: { target: 'call-commitments.commitmentList' }, id: show_form && dom_id(@page.call, 'commitments')}
     - if commitments.empty?
-      .list-item
+      .list-item#empty_message{data: {target: 'call-commitments.emptyMessage'}}
         = empty_message
     - commitments.sort_by(&:membership_id).each do |commitment|
-      .list-item.space-between{data: {target: 'call-commitments.commitment' } }
-        .commitment-body{id: dom_id(commitment)}
-          = render 'commitment_body', commitment: commitment
-
-        .commitment-links
-          - if current_user == commitment.user
-            .edit
-              = render 'edit_commitment_link', commitment: commitment
-
-          - if show_completed
-            .confirm
-              = commitment_confirmation_link(commitment) 
+      = render 'commitment',
+        commitment: commitment,
+        viewer: viewer,
+        show_completed: show_completed
 
   .card-footer
     - if show_form

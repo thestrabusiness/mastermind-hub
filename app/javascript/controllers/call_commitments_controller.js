@@ -2,39 +2,78 @@ import { Controller } from "stimulus"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static targets = ['commitment', 'icon']
+  static targets = ['emptyMessage', 'commitmentList', 'commitment', 'icon']
 
   connect() {
-    let callCommitmentsController = this;
     this.container = this.element;
+    this.commitmentCallId = this.container.getAttribute('data-commitment-call-id')
     this.callId = this.container.getAttribute('data-call-id')
+    this.currentUserId = parseInt(this.container.getAttribute('data-current-user-id'));
 
-    if (this.callId) { 
-      this.subscription = consumer.subscriptions.create({
-            channel: "CallCommitmentsChannel",
-            call_id: this.callId,
-          }, {
+    this.subscribeToCommitmentCreation();
 
-          connected() {
-            // Called when the subscription is ready for use on the server
-          },
-
-          disconnected() {
-            // Called when the subscription has been terminated by the server
-          },
-
-          received(data) {
-            callCommitmentsController.iconTargets.forEach((element) => {
-              if (element.getAttribute('data-id') == data.commitment_id) {
-                element.innerHTML = data.html;
-              }
-            })
-          }
-        });
+    if (this.commitmentCallId) { 
+      this.subscribeToConfirmations();
     }
   }
 
   disconnect() {
-    this.subscription.unsubscribe();
+    this.confirmationsSubscription.unsubscribe();
+    this.commitmentsSubscription.unsubscribe();
+  }
+
+  subscribeToConfirmations() { 
+    let controller = this;
+    this.confirmationsSubscription = consumer.subscriptions.create({
+          channel: "CommitmentConfirmationsChannel",
+          call_id: this.commitmentCallId,
+        }, {
+
+        connected() {
+          // Called when the subscription is ready for use on the server
+        },
+
+        disconnected() {
+          // Called when the subscription has been terminated by the server
+        },
+
+        received(data) {
+          controller.iconTargets.forEach((element) => {
+            if (element.getAttribute('data-id') == data.commitment_id) {
+              element.innerHTML = data.html;
+            }
+          })
+        }
+      });
+  }
+
+
+  subscribeToCommitmentCreation() {
+    let controller = this;
+    this.commitmentsSubscription = consumer.subscriptions.create({
+          channel: "CallCommitmentsChannel",
+          call_id: this.callId,
+        }, {
+
+        connected() {
+          // Called when the subscription is ready for use on the server
+        },
+
+        disconnected() {
+          // Called when the subscription has been terminated by the server
+        },
+
+        received(data) {
+          if (controller.hasEmptyMessageTarget) {
+            controller.emptyMessageTarget.remove();
+          }
+
+          controller.commitmentListTargets.forEach((element) => {
+            if (element.id && data.author_id !== controller.currentUserId) {
+              element.insertAdjacentHTML('beforeend', data.html);
+            }
+          })
+        }
+      });
   }
 }

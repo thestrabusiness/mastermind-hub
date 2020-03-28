@@ -2,7 +2,7 @@ class BroadcastCommitmentStatusJob < ApplicationJob
   def perform(call, commitment, user)
     ActionCable
       .server
-      .broadcast "call_commitments_#{call.id}",
+      .broadcast "commitment_confirmations_#{call.id}",
                  { updater_id: user.id,
                    commitment_id: commitment.id,
                    html: render_new_icon(commitment) }
