@@ -5,10 +5,10 @@ export default class extends Controller {
   static targets = ['list', 'textarea']
 
   connect() {
-    const callNotesController = this;
-    const notesContainer = this.element;
-    const callId = notesContainer.getAttribute('data-call-id');
-    this.currentUserId = parseInt(notesContainer.getAttribute('data-current-user-id'));
+    const controller = this;
+    const container = this.element;
+    const callId = container.getAttribute('data-call-id');
+    this.currentUserId = parseInt(container.getAttribute('data-current-user-id'));
 
     this.subscription = consumer.subscriptions.create({
         channel: "CallNotesChannel",
@@ -24,8 +24,8 @@ export default class extends Controller {
       },
 
       received(message) {
-        if (message.author_id !== this.currentUserId) {
-          callNotesController.appendNewMessage(message)
+        if (message.author_id !== controller.currentUserId) {
+          controller.appendNewMessage(message)
         }
       }
     });
