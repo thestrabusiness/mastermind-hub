@@ -16,6 +16,10 @@ class CallPage
     call.scheduled_on > Date.current
   end
 
+  def viewing_previous_call?
+    call.scheduled_on < Date.current
+  end
+
   def last_weeks_call
     call.previous_call
   end
@@ -42,24 +46,6 @@ class CallPage
 
   def notes
     call.notes
-  end
-
-  def commitment_param(commitment)
-    params = { commitment: { completed: true } }
-
-    if commitment.completed?
-      params[:commitment][:completed] = false
-    end
-
-    params
-  end
-
-  def commitment_icon(commitment)
-    commitment.completed ? 'check' : 'x'
-  end
-
-  def icon_class(commitment)
-    commitment.completed ? 'green' : 'red'
   end
 
   private

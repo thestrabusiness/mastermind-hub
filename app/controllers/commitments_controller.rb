@@ -20,7 +20,6 @@ class CommitmentsController < ApplicationController
 
     respond_to do |format|
       format.js {}
-      format.html { redirect_to call_path(@call.next_call) }
     end
   end
 
@@ -31,7 +30,7 @@ class CommitmentsController < ApplicationController
   end
 
   def commitment_params
-    params.require(:commitment).permit(:body, :completed)
+    params.require(:commitment).permit(:body)
   end
 
   def user_membership

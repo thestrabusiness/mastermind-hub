@@ -71,3 +71,11 @@
     margin: 5px;
   }
 }
+
+.commitment-links {
+  display: flex;
+
+  .confirm, .edit {
+    margin-left: 10px;
+  }
+}

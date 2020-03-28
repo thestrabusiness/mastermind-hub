@@ -1,0 +1,3 @@
+document
+  .getElementById('<%= dom_id(@commitment, 'status') %>')
+  .innerHTML = "<%= j render 'calls/commitment_icon', commitment: @commitment %>"

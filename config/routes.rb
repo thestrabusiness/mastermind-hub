@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :calls, only: [:show, :edit, :update] do
-    resources :commitments, except: :destroy
+    resources :commitments, except: :destroy do
+      resource :confirmation, only: :update, controller: :commitment_confirmations
+    end
     resource :note, only: :create
     resource :timer, only: :create
   end
