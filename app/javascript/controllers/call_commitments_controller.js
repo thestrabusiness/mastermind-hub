@@ -9,6 +9,7 @@ export default class extends Controller {
     this.commitmentCallId = this.container.getAttribute('data-commitment-call-id')
     this.callId = this.container.getAttribute('data-call-id')
     this.currentUserId = parseInt(this.container.getAttribute('data-current-user-id'));
+    this.subscriptions = [];
 
     this.subscribeToCommitmentCreation();
 
@@ -18,16 +19,16 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.confirmationsSubscription.unsubscribe();
-    this.commitmentsSubscription.unsubscribe();
+    this.subscriptions.forEach((sub) =>{ sub.unsubscribe(); })
   }
 
   subscribeToConfirmations() { 
     let controller = this;
-    this.confirmationsSubscription = consumer.subscriptions.create({
-          channel: "CommitmentConfirmationsChannel",
-          call_id: this.commitmentCallId,
-        }, {
+    this.subscriptions.push(
+      consumer.subscriptions.create({
+        channel: "CommitmentConfirmationsChannel",
+        call_id: this.commitmentCallId,
+      }, {
 
         connected() {
           // Called when the subscription is ready for use on the server
@@ -44,16 +45,18 @@ export default class extends Controller {
             }
           })
         }
-      });
+      })
+    );
   }
 
 
   subscribeToCommitmentCreation() {
     let controller = this;
-    this.commitmentsSubscription = consumer.subscriptions.create({
-          channel: "CallCommitmentsChannel",
-          call_id: this.callId,
-        }, {
+    this.subscriptions.push(
+      consumer.subscriptions.create({
+        channel: "CallCommitmentsChannel",
+        call_id: this.callId,
+      }, {
 
         connected() {
           // Called when the subscription is ready for use on the server
@@ -74,6 +77,7 @@ export default class extends Controller {
             }
           })
         }
-      });
+      })
+    );
   }
 }
