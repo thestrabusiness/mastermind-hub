@@ -29,4 +29,8 @@ class Call < ApplicationRecord
   def todays_call?
     self == group.todays_call
   end
+
+  def past_call?
+    scheduled_on < Time.current
+  end
 end

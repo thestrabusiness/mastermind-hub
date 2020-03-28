@@ -20,12 +20,12 @@ class CallPage
     call.scheduled_on < Date.current
   end
 
-  def last_weeks_call
+  def previous_weeks_call
     call.previous_call
   end
 
-  def last_weeks_commitments
-    last_weeks_call.commitments.includes(membership: :user)
+  def previous_weeks_commitments
+    previous_weeks_call.commitments.includes(membership: :user)
   end
 
   def next_call

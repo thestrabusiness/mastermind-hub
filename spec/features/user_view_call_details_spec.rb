@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature 'User views call details page', js: true do
-  it 'renders last weeks\'s commitments' do
+  it 'renders the previous weeks\'s commitments' do
     user = create(:user, :with_group)
     call = create(:call, group: user.groups.first)
-    last_weeks_call = create(:call,
-                             group: user.groups.first,
-                             scheduled_on: 7.days.ago)
+    previous_weeks_call = create(:call,
+                                 group: user.groups.first,
+                                 scheduled_on: 7.days.ago)
     commitment = create(:commitment,
-                        call: last_weeks_call,
+                        call: previous_weeks_call,
                         membership: user.memberships.first)
 
     visit call_path(call, as: user)

@@ -1,7 +1,7 @@
 module CallCommitmentHelper
   def enable_commitment_link(commitment)
     @page.viewer_can_update_commitment?(commitment) &&
-      @page.last_weeks_commitments.include?(commitment)
+      @page.previous_weeks_commitments.include?(commitment)
   end
 
   def commitment_confirmation_link(commitment)
