@@ -1,7 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe GroupInviteMailer do
-  it 'sends an email that contains an invite link' do
+  it "sends an email that contains an invite link" do
     invite = build(:group_invite)
     user = build(:user)
     mail = GroupInviteMailer.invite(invite, user)

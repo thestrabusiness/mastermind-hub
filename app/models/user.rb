@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   include Clearance::User
 
   has_many :memberships
   has_many :commitments, through: :memberships
   has_many :groups, through: :memberships
-  has_many :created_groups, class_name: 'Group', foreign_key: :creator_id
+  has_many :created_groups, class_name: "Group", foreign_key: :creator_id
 
   def full_name
     "#{first_name} #{last_name}"

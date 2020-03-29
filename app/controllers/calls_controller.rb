@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CallsController < ApplicationController
   before_action :require_login
   before_action :load_and_authorize_call
@@ -20,9 +22,7 @@ class CallsController < ApplicationController
   def load_and_authorize_call
     @call = Call.find(params[:id])
 
-    unless @call.group.users.includes(current_user)
-      redirect_to groups_path
-    end
+    redirect_to groups_path unless @call.group.users.includes(current_user)
   end
 
   def call_params

@@ -1,12 +1,15 @@
-require 'chronic'
+# frozen_string_literal: true
+
+require "chronic"
 
 class Group < ApplicationRecord
-  belongs_to :creator, class_name: 'User'
+  belongs_to :creator, class_name: "User"
   has_many :memberships
   has_many :users, through: :memberships
   has_many :calls
 
-  enum call_day: [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday]
+  enum call_day: [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday,
+                  :saturday]
 
   with_options presence: true do
     validates :name
@@ -20,9 +23,7 @@ class Group < ApplicationRecord
   def upcoming_call
     existing_call = calls.after(Date.current).first
 
-    if existing_call.nil?
-      return calls.create(scheduled_on: next_call_date)
-    end
+    return calls.create(scheduled_on: next_call_date) if existing_call.nil?
 
     existing_call
   end

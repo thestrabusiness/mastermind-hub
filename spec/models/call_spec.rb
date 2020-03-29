@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 describe Call do
-  describe 'previous_call' do
-    it 'returns the call scheduled immediately before the given call' do
+  describe "previous_call" do
+    it "returns the call scheduled immediately before the given call" do
       group = create(:group)
       first_call = create(:call, scheduled_on: 2.weeks.ago, group: group)
       third_call = create(:call, scheduled_on: Time.current, group: group)
@@ -14,8 +16,8 @@ describe Call do
     end
   end
 
-  describe 'next_call' do
-    it 'returns the call scheduled immediately after the given call' do
+  describe "next_call" do
+    it "returns the call scheduled immediately after the given call" do
       group = create(:group)
       first_call = create(:call, scheduled_on: 2.weeks.ago, group: group)
       third_call = create(:call, scheduled_on: Time.current, group: group)

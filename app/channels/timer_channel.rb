@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimerChannel < ApplicationCable::Channel
   def subscribed
     stream_from "call_timer_#{call.id}"

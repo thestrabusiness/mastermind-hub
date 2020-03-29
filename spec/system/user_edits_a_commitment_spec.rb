@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "User edits a commitment", js: true do
   it "does not alert the user when editing a commitment for today's call" do
@@ -10,7 +12,7 @@ RSpec.describe "User edits a commitment", js: true do
                         body: "A commitment")
 
     visit call_path(call, as: membership.user)
-    click_on dom_id(commitment, 'pencil')
+    click_on dom_id(commitment, "pencil")
 
     expect { page.driver.browser.switch_to.alert }
       .to raise_exception Selenium::WebDriver::Error::NoSuchAlertError
@@ -26,7 +28,7 @@ RSpec.describe "User edits a commitment", js: true do
                         body: "A commitment")
 
     visit call_path(call, as: membership.user)
-    click_on dom_id(commitment, 'pencil')
+    click_on dom_id(commitment, "pencil")
 
     alert_text = page.driver.browser.switch_to.alert.text
 
@@ -42,7 +44,7 @@ RSpec.describe "User edits a commitment", js: true do
                         body: "A commitment")
 
     visit call_path(call, as: membership.user)
-    click_on dom_id(commitment, 'pencil')
+    click_on dom_id(commitment, "pencil")
 
     expect(page).to have_selector("##{dom_id(commitment, 'inline_form')}")
   end
@@ -56,10 +58,10 @@ RSpec.describe "User edits a commitment", js: true do
                         body: "A commitment")
 
     visit call_path(call, as: membership.user)
-    click_on dom_id(commitment, 'pencil')
-    fill_in 'commitment_body', with: 'A new commitment'
-    click_on 'Done'
+    click_on dom_id(commitment, "pencil")
+    fill_in "commitment_body", with: "A new commitment"
+    click_on "Done"
 
-    expect(page).to have_content 'A new commitment'
+    expect(page).to have_content "A new commitment"
   end
 end

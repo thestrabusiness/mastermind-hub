@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Group do
-  describe 'next call' do
-    it 'returns the next call scheduled after the given one' do
+  describe "next call" do
+    it "returns the next call scheduled after the given one" do
       group = create(:group)
       future_call = create(:call, group: group, scheduled_on: 7.days.from_now)
       past_call = create(:call, group: group, scheduled_on: 7.days.ago)
@@ -14,9 +16,9 @@ RSpec.describe Group do
     end
   end
 
-  describe 'upcoming_call' do
-    context 'when there is a future call scheduled' do
-      it 'returns the call' do
+  describe "upcoming_call" do
+    context "when there is a future call scheduled" do
+      it "returns the call" do
         group = create(:group)
         _past_call = create(:call, group: group, scheduled_on: 7.days.ago)
         _todays_call = create(:call, group: group)
@@ -26,9 +28,9 @@ RSpec.describe Group do
       end
     end
 
-    context 'when there is no future call scheduled' do
-      context 'and today is a call day' do
-        it 'creates a call scheduled 7 days from today' do
+    context "when there is no future call scheduled" do
+      context "and today is a call day" do
+        it "creates a call scheduled 7 days from today" do
           group = create(:group, call_day: Date.current.wday)
           past_call = create(:call, group: group, scheduled_on: 7.days.ago)
           todays_call = create(:call, group: group)
@@ -41,14 +43,16 @@ RSpec.describe Group do
           expect(Call.count).to eq 3
           expect(upcoming_call).to_not eq past_call
           expect(upcoming_call).to_not eq todays_call
-          expect(upcoming_call.scheduled_on.strftime('%A %e'))
-            .to eq expected_next_call_date.strftime('%A %e')
+          expect(upcoming_call.scheduled_on.strftime("%A %e"))
+            .to eq expected_next_call_date.strftime("%A %e")
         end
       end
 
-      context 'and today is not a call day' do
-        it 'creates a call scheduled 7 days after the most recent call' do
-          call_day = Array(0..6).reject { |day| day == Date.current.wday }.sample
+      context "and today is not a call day" do
+        it "creates a call scheduled 7 days after the most recent call" do
+          call_day = Array(0..6).reject do |day|
+            day == Date.current.wday
+          end .sample
           group = create(:group, call_day: call_day)
           past_call = create(
             :call,
@@ -64,8 +68,8 @@ RSpec.describe Group do
 
           expect(Call.count).to eq 2
           expect(upcoming_call).to_not eq past_call
-          expect(upcoming_call.scheduled_on.strftime('%A %e'))
-            .to eq expected_next_call_date.strftime('%A %e')
+          expect(upcoming_call.scheduled_on.strftime("%A %e"))
+            .to eq expected_next_call_date.strftime("%A %e")
         end
       end
     end

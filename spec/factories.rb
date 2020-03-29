@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
-    first_name { 'Elon' }
+    first_name { "Elon" }
     sequence(:last_name) { |n| "Musk#{n}" }
     sequence(:email) { |n| "elon#{n}@example.com" }
-    password { 'password' }
+    password { "password" }
 
     trait :facilitator do
       after(:create) do |user, _|
@@ -41,7 +43,7 @@ FactoryBot.define do
   end
 
   factory :commitment do
-    body { 'I commit to doing a thing' }
+    body { "I commit to doing a thing" }
     association :membership
 
     trait :completed do

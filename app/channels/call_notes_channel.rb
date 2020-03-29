@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CallNotesChannel < ApplicationCable::Channel
   def subscribed
     stream_for call

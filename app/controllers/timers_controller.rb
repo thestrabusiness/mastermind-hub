@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimersController < ApplicationController
   before_action :require_login
   before_action :load_and_authorize_call
@@ -15,15 +17,11 @@ class TimersController < ApplicationController
   def load_and_authorize_call
     @call = Call.find(params[:call_id])
 
-    if !current_user.in_group?(@call.group)
-      redirect_to groups_path
-    end
+    redirect_to groups_path unless current_user.in_group?(@call.group)
   end
 
   def check_role
-    if @call.group.facilitator != current_user
-      redirect_to call_path(@call)
-    end
+    redirect_to call_path(@call) if @call.group.facilitator != current_user
   end
 
   def timer_params

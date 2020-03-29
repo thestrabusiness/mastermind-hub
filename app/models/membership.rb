@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
-  FACILITATOR = 'facilitator'.freeze
-  MEMBER = 'member'.freeze
+  FACILITATOR = "facilitator"
+  MEMBER = "member"
   ROLES = [FACILITATOR, MEMBER].freeze
 
   ROLES.each do |role|

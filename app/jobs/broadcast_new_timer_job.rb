@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BroadcastNewTimerJob < ApplicationJob
   def perform(page)
     ActionCable
@@ -8,6 +10,6 @@ class BroadcastNewTimerJob < ApplicationJob
 
   def render_timer_details(page)
     ApplicationController
-      .render(partial: 'calls/timer_details', locals: { page: page })
+      .render(partial: "calls/timer_details", locals: { page: page })
   end
 end

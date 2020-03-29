@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BroadcastCommitmentStatusJob < ApplicationJob
   def perform(call, commitment, user)
     ActionCable
@@ -10,6 +12,9 @@ class BroadcastCommitmentStatusJob < ApplicationJob
 
   def render_new_icon(commitment)
     ApplicationController
-      .render(partial: 'calls/commitment_icon', locals: { commitment: commitment })
+      .render(
+        partial: "calls/commitment_icon",
+        locals: { commitment: commitment }
+      )
   end
 end

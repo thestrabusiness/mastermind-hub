@@ -1,7 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "User views group invites page" do
-  it 'lists unaccepted group invites sent to the user\'s email' do
+  it "lists unaccepted group invites sent to the user's email" do
     user = create(:user)
     invites = create_list(:group_invite, 3, email: user.email)
     accepted_invite = create(:group_invite, email: user.email, accepted: true)
@@ -14,14 +16,14 @@ RSpec.describe "User views group invites page" do
     expect(page).to_not have_content accepted_invite.group.name
   end
 
-  context 'accepts the invite' do
-    it 'removes the invite from the list and adds the user to the group' do
+  context "accepts the invite" do
+    it "removes the invite from the list and adds the user to the group" do
       user = create(:user)
       invite = create(:group_invite, email: user.email)
 
       visit group_invites_path(as: user)
 
-      click_on 'Accept'
+      click_on "Accept"
 
       expect(current_path).to eq group_invites_path
       expect(page).to_not have_content invite.group.name
@@ -29,14 +31,14 @@ RSpec.describe "User views group invites page" do
     end
   end
 
-  context 'rejects the invite' do
-    it 'removes the invite from the list' do
+  context "rejects the invite" do
+    it "removes the invite from the list" do
       user = create(:user)
       invite = create(:group_invite, email: user.email)
 
       visit group_invites_path(as: user)
 
-      click_on 'Reject'
+      click_on "Reject"
 
       expect(current_path).to eq group_invites_path
       expect(page).to_not have_content invite.group.name

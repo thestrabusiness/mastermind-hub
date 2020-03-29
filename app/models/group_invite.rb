@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupInvite < ApplicationRecord
   after_initialize :generate_token, if: :new_record?
 

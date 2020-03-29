@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommitmentConfirmationsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "commitment_confirmations_#{call.id}"

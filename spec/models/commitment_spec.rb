@@ -1,7 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Commitment do
-  describe 'validations' do
+  describe "validations" do
     it "validates that the membership is for the associated call's group" do
       call = create(:call)
       valid_group = call.group

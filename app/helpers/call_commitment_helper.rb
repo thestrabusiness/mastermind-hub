@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CallCommitmentHelper
   def enable_commitment_link(commitment)
     @page.viewer_can_update_commitment?(commitment) &&
@@ -17,11 +19,11 @@ module CallCommitmentHelper
   end
 
   def commitment_icon(commitment)
-    commitment.completed ? 'check' : 'x'
+    commitment.completed ? "check" : "x"
   end
 
   def icon_class(commitment)
-    commitment.completed ? 'green' : 'red'
+    commitment.completed ? "green" : "red"
   end
 
   private
@@ -33,17 +35,15 @@ module CallCommitmentHelper
   def commitment_param(commitment)
     params = { commitment: { completed: true } }
 
-    if commitment.completed?
-      params[:commitment][:completed] = false
-    end
+    params[:commitment][:completed] = false if commitment.completed?
 
     params
   end
 
   def icon_container(commitment)
     content_tag(:div,
-                render('commitment_icon', commitment: commitment),
-                id: dom_id(commitment, 'status'),
-                data: { target: 'call-commitments.icon', id: commitment.id })
+                render("commitment_icon", commitment: commitment),
+                id: dom_id(commitment, "status"),
+                data: { target: "call-commitments.icon", id: commitment.id })
   end
 end

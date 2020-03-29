@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BroadcastNewCommitmentJob < ApplicationJob
   def perform(call, commitment, author)
     ActionCable
@@ -10,7 +12,7 @@ class BroadcastNewCommitmentJob < ApplicationJob
   def render_new_commitment(commitment)
     ApplicationController
       .render(
-        partial: 'calls/commitment',
+        partial: "calls/commitment",
         locals: { commitment: commitment, show_completed: false, viewer: nil }
       )
   end

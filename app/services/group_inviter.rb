@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupInviter
   def self.perform(email, group, user)
     invite = GroupInvite.create(email: email, group: group)

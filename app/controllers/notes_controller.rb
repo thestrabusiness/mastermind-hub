@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class NotesController < ApplicationController
   def create
     @call = Call.find(params[:call_id])
     @note = @call.notes.create(note_params)
 
-    if @note.persisted?
-      CallNotesChannel.broadcast_to @call, serialized_note
-    end
+    CallNotesChannel.broadcast_to @call, serialized_note if @note.persisted?
   end
 
   private

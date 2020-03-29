@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Timer < ApplicationRecord
   DURATION_RANGE = Array(1..60)
   belongs_to :user
@@ -19,14 +21,14 @@ class Timer < ApplicationRecord
   end
 
   def ends_at_for_js
-    ends_at.strftime('%B %d, %Y %H:%M:%S UTC')
+    ends_at.strftime("%B %d, %Y %H:%M:%S UTC")
   end
 
   def initial_text
     if ended?
-      'TIMES UP'
+      "TIMES UP"
     else
-      '00m 00s'
+      "00m 00s"
     end
   end
 end

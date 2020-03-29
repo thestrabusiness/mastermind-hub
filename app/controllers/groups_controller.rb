@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
   before_action :require_login
 
@@ -51,7 +53,7 @@ class GroupsController < ApplicationController
   end
 
   def emails
-    params.fetch(:emails)&.split(',') || []
+    params.fetch(:emails)&.split(",") || []
   end
 
   def create_membership

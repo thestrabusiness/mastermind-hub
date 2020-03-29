@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupInvitesController < ApplicationController
   def index
     @group_invites = GroupInvite.unaccepted.where(email: current_user.email)

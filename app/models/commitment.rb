@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Commitment < ApplicationRecord
   belongs_to :membership
   belongs_to :call
@@ -16,8 +18,8 @@ class Commitment < ApplicationRecord
   private
 
   def membership_in_call_group
-    unless call&.group_id == membership&.group_id
-      errors.add(:membership, "must be a member in the call's group")
-    end
+    return if call&.group_id == membership&.group_id
+
+    errors.add(:membership, "must be a member in the call's group")
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommitmentConfirmationsController < ApplicationController
   def update
     @call = Call.find(params[:call_id])
