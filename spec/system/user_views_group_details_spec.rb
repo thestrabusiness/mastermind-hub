@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views group details page' do
+RSpec.describe 'User views group details page' do
   it 'renders a list of previous calls' do
     user = create(:user, :facilitator)
     group = user.groups.first

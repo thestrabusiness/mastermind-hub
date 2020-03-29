@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User creates a group', js: true do
+RSpec.describe 'User creates a group', js: true do
   it 'Creates a group and shows its details' do
     user = create(:user)
     group_name = 'New Group'
