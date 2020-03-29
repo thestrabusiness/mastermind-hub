@@ -17,6 +17,7 @@ gem "pg"
 gem "pry"
 gem "puma", "~> 4.3"
 gem "rails", git: "https://github.com/rails/rails.git", branch: "6-0-stable"
+gem "rubocop", require: false
 gem "sass-rails", ">= 6"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
