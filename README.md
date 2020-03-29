@@ -1,24 +1,30 @@
-# README
+# Mastermind Hub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is used to help keep track of Mastermind calls my friends and I
+hold once a week.
 
-Things you may want to cover:
+## Dev Requirements
 
-* Ruby version
+* Ruby 2.7.0
 
-* System dependencies
+## Setup
 
-* Configuration
+1. Clone the repo
+1. Run `bin/setup` from the project root
+1. Run `rails s` to start the server
+1. Visit `localhost:3000`
 
-* Database creation
+## Contributing
 
-* Database initialization
+If you want to contribute to this project: 
 
-* How to run the test suite
+* Check for any open issues that need help
+* Open a new issue to discuss any problems or features you're interested in
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Rubocop
 
-* ...
+Rubocop is included in the Gemfile. Please run it with the `-a` flag:
+
+`rubocop -a`
+
