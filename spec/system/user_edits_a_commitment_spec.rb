@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "User edits a commitment", js: true do
+RSpec.describe "User edits a commitment", js: true do
   it "does not alert the user when editing a commitment for today's call" do
     membership = create(:membership)
     call = create(:call, group: membership.group)
