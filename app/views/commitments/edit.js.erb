@@ -1,9 +1,9 @@
 document
-  .getElementById('<%= dom_id(@commitment) %>')
+  .getElementById('<%= dom_id(@commitment, 'body') %>')
   .insertAdjacentHTML('afterend', "<%= j render 'inline_form', commitment: @commitment, call: @call %>")
 
 document
-  .getElementById('<%= dom_id(@commitment) %>')
+  .getElementById('<%= dom_id(@commitment, 'body') %>')
   .style
   .display = 'none'
 

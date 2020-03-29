@@ -31,6 +31,6 @@ class Call < ApplicationRecord
   end
 
   def past_call?
-    scheduled_on < Time.current
+    scheduled_on < Date.current
   end
 end
