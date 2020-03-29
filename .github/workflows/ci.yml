@@ -1,0 +1,58 @@
+name: CI
+
+on: [pull_request, push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432/tcp
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Ruby 2.7
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7.0
+          
+      - name: Install dependencies
+        run: sudo apt-get install libpq-dev
+     
+      - name: Set up Rails and db
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
+          APPLICATION_HOST: host 
+        run: |
+          yarn install --check-files
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bin/rails db:setup
+     
+      - name: Run tests with RSpec
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
+          APPLICATION_HOST: host
+        run: |
+          bundle exec rspec
+
