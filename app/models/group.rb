@@ -18,7 +18,7 @@ class Group < ApplicationRecord
   end
 
   def upcoming_call
-    existing_call = calls.after(Date.today).first
+    existing_call = calls.after(Date.current).first
 
     if existing_call.nil?
       return calls.create(scheduled_on: next_call_date)
@@ -28,11 +28,11 @@ class Group < ApplicationRecord
   end
 
   def todays_call
-    calls.on(Date.today).take
+    calls.on(Date.current).take
   end
 
   def previous_calls
-    calls.before(Date.today)
+    calls.before(Date.current)
   end
 
   def facilitator
@@ -46,8 +46,8 @@ class Group < ApplicationRecord
   private
 
   def next_call_date
-    if call_day_before_type_cast == Date.today.wday
-      Chronic.parse("next week #{call_day}")
+    if call_day_before_type_cast == Date.current.wday
+      Chronic.parse("next #{call_day}")
     else
       Chronic.parse("this #{call_day}")
     end

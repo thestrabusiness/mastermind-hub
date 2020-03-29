@@ -39,9 +39,9 @@ group = Group.create!(name: 'Fellas', creator: anthony, call_time: '16:00')
 group.memberships.create!(user: anthony, role: Membership::FACILITATOR)
 group.users << [kurt, eric, tad, joe]
 
-last_call = group.calls.create!(scheduled_on: Date.today - 7.days)
-todays_call = group.calls.create!(scheduled_on: Date.today)
-group.calls.create!(scheduled_on: Date.today - 14.days)
+last_call = group.calls.create!(scheduled_on: Date.current - 7.days)
+todays_call = group.calls.create!(scheduled_on: Date.current)
+group.calls.create!(scheduled_on: Date.current - 14.days)
 
 group.memberships.each do |member|
   body = "#{member.user.first_name}'s commitment"

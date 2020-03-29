@@ -29,7 +29,7 @@ RSpec.describe Group do
     context 'when there is no future call scheduled' do
       context 'and today is a call day' do
         it 'creates a call scheduled 7 days from today' do
-          group = create(:group, call_day: Date.today.wday)
+          group = create(:group, call_day: Date.current.wday)
           past_call = create(:call, group: group, scheduled_on: 7.days.ago)
           todays_call = create(:call, group: group)
           expected_next_call_date = todays_call.scheduled_on + 7.days
@@ -48,13 +48,14 @@ RSpec.describe Group do
 
       context 'and today is not a call day' do
         it 'creates a call scheduled 7 days after the most recent call' do
-          call_day = Array(0..7).reject { |day| day == Date.today.wday }.sample
+          call_day = Array(0..6).reject { |day| day == Date.current.wday }.sample
           group = create(:group, call_day: call_day)
           past_call = create(
             :call,
             group: group,
             scheduled_on: Chronic.parse("last #{group.call_day}")
           )
+
           expected_next_call_date = past_call.scheduled_on + 7.days
 
           expect(Call.count).to eq 1
