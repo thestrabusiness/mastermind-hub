@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views call details page', js: true do
+RSpec.describe 'User views call details page', js: true do
   it 'renders the previous weeks\'s commitments' do
     user = create(:user, :with_group)
     call = create(:call, group: user.groups.first)

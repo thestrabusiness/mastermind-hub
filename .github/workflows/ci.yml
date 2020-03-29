@@ -1,6 +1,10 @@
 name: CI
 
-on: [pull_request, push]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -19,18 +23,18 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        
+
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Set up Ruby 2.7
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7.0
-          
+
       - name: Install dependencies
         run: sudo apt-get install libpq-dev
-     
+
       - name: Set up Rails and db
         env:
           PGHOST: localhost
@@ -43,8 +47,8 @@ jobs:
           yarn install --check-files
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bin/rails db:setup
-     
+          bin/rails db:test:prepare
+
       - name: Run tests with RSpec
         env:
           PGHOST: localhost
