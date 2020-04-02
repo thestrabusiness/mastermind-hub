@@ -9,6 +9,9 @@ AllCops:
 Layout/LineLength:
   AutoCorrect: true
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 Metrics/BlockLength:
   Enabled: false
 

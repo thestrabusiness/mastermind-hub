@@ -1,0 +1,17 @@
+<% summaries.each do |summary| %>
+  <div>
+    <h3><%= summary.user.first_plus_initial %></h3>
+    <div>
+      <b>
+        Met commitment last week? <%= summary.previous_commitment_met? %>:
+      </b>
+      <%= summary.previous_weeks_commitment_text %>
+    </div>
+    <div>
+      <b>
+        This week's commitment:
+      </b>
+      <%= summary.this_weeks_commitment_text %>
+    </div>
+  </div>
+<% end %>
