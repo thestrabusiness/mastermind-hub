@@ -2,26 +2,32 @@
 
 class CommitmentsController < ApplicationController
   before_action :require_login
+  before_action :set_call
+  before_action :set_commitment, except: :create
 
   def create
-    @call = Call.find(params[:call_id])
     @commitment = @call.commitments.create(create_commitment_params)
     @page = CallPage.new(@call, current_user)
-    BroadcastNewCommitmentJob.perform_now(@call, @commitment, current_user)
+
+    if @commitment.persisted?
+      BroadcastNewCommitmentJob.perform_now(@call, @commitment, current_user)
+      EnqueueCommitmentReminders.perform(@call) if @call.todays_call?
+    end
 
     respond_to do |format|
-      format.js {}
+      format.js do
+        if @commitment.persisted?
+          render "create"
+        else
+          head :bad_request
+        end
+      end
     end
   end
 
-  def edit
-    @call = Call.find(params[:call_id])
-    @commitment = @call.commitments.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @call = Call.find(params[:call_id])
-    @commitment = @call.commitments.find(params[:id])
     @commitment.update(commitment_params)
 
     respond_to do |format|
@@ -30,6 +36,14 @@ class CommitmentsController < ApplicationController
   end
 
   private
+
+  def set_call
+    @call = Call.find(params[:call_id])
+  end
+
+  def set_commitment
+    @commitment = @call.commitments.find(params[:id])
+  end
 
   def create_commitment_params
     commitment_params.merge(membership: user_membership)
