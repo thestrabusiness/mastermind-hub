@@ -6,6 +6,7 @@ hold once a week.
 ## Dev Requirements
 
 * Ruby 2.7.0
+* PostgreSQL 11
 
 ## Setup
 
