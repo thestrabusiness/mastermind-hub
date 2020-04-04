@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserAvatar
   include ActionView::Helpers::AssetTagHelper
   include ActionView::Helpers::TagHelper
