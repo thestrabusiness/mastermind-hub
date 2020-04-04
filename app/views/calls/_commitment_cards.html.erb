@@ -1,31 +1,28 @@
 <% if @page.previous_weeks_call.present? %>
-  <%= render 'commitments',
-    title: "Previous Week's Commitments",
-    commitments: @page.previous_weeks_commitments,
-    empty_message: "There were no commitments for the last call",
-    show_completed: true,
-    show_form: false,
-    viewer: current_user
-  %>
+  <%= render "commitments",
+             title: "Previous Week's Commitments",
+             commitments: @page.previous_weeks_commitments,
+             empty_message: "There were no commitments for the last call",
+             show_completed: true,
+             show_form: false,
+             viewer: current_user %>
 <% end %>
 
 <% if @page.viewing_todays_call? || @page.viewing_upcoming_call? %>
-  <%= render 'commitments',
-    title:"This week we're committing to...",
-    commitments: @page.call.commitments,
-    empty_message: "No one has added any commitments yet",
-    show_completed: false,
-    show_form: !@page.viewer_added_commitment?,
-    viewer: current_user
-  %>
+  <%= render "commitments",
+             title: "This week we're committing to...",
+             commitments: @page.call.commitments,
+             empty_message: "No one has added any commitments yet",
+             show_completed: false,
+             show_form: !@page.viewer_added_commitment?,
+             viewer: current_user %>
 
 <% else %>
-  <%= render 'commitments',
-    title: 'This week we committed to...',
-    commitments: @page.call.commitments,
-    empty_message: "No one added any commitments to this call",
-    show_completed: true,
-    show_form: false,
-    viewer: current_user
-  %>
+  <%= render "commitments",
+             title: "This week we committed to...",
+             commitments: @page.call.commitments,
+             empty_message: "No one added any commitments to this call",
+             show_completed: true,
+             show_form: false,
+             viewer: current_user %>
 <% end %>

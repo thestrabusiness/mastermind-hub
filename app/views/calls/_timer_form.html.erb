@@ -1,0 +1,20 @@
+<div class="timer-controls">
+  <%= form_for Timer.new,
+               url: call_timer_path(page.call, page.timer),
+               html: { class: "inline spaced centered" } do |form| %>
+
+    <div class="form-field">
+      <%= form.label :duration %>
+      <%= form.select :duration,
+                      options_for_select(Timer.duration_select_options) %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :user_id %>
+      <%= form.select :user_id,
+                      options_for_select(page.group.user_select_options) %>
+    </div>
+
+    <%= form.submit %>
+  <% end %>
+</div>

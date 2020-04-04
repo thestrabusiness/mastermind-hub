@@ -1,0 +1,22 @@
+<div
+  class="list-item space-between"
+  data-target="call-commitments.commitment">
+
+  <div class="commitment-body" id="<%= dom_id(commitment, "body") %>">
+    <%= render "calls/commitment_body", commitment: commitment %>
+  </div>
+
+  <div class="commitment-links">
+    <% if viewer == commitment.user %>
+      <div class="edit">
+        <%= render "calls/edit_commitment_link", commitment: commitment %>
+      </div>
+    <% end %>
+
+    <% if show_completed %>
+      <div class="confirm">
+        <%= commitment_confirmation_link commitment %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<%= link_to edit_call_commitment_path(commitment.call, commitment),
+            id: dom_id(commitment, "pencil"),
+            data: { confirm: edit_commitment_alert(commitment) },
+            remote: true do %>
+  <%= octicon "pencil" %>
+<% end %>

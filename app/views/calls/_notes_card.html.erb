@@ -1,9 +1,8 @@
 <div
   class="card card-large"
   data-controller="call-notes"
-  data-call-id="<%= @page.call.id%>"
-  data-current_user-id="<%= current_user.id%>"
-  >
+  data-call-id="<%= @page.call.id %>"
+  data-current_user-id="<%= current_user.id %>">
 
   <div class="card-title">
     Notes
@@ -20,19 +19,12 @@
       Add a note
     </div>
     <%= form_with model: [@page.call, Note.new],
-      url: call_note_path(@page.call),
-      remote: true do |form|
-    %>
-      <div class="form-field">
-        <%= form.text_area :body, data: { target: "call-notes.textarea" } %>
-      </div>
-      <%= form.submit %>
+                  url: call_note_path(@page.call),
+                  remote: true do |form| %>
+        <div class="form-field">
+          <%= form.text_area :body, data: { target: "call-notes.textarea" } %>
+        </div>
+        <%= form.submit %>
     <% end %>
   </div>
-
-  <audio
-    src="http://static1.grsites.com/archive/sounds/musical/musical009.mp3"
-    data-target="timer.alert"
-    controls="false"
-    >
 </div>
