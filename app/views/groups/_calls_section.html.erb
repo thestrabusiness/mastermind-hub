@@ -1,0 +1,28 @@
+<div id="<%= section_id %>">
+  <div class="subtitle">
+    <%= title %>
+  </div>
+  <div class="card-list">
+    <% calls.each do |call| %>
+      <%= link_to call_path(call) do %>
+        <div class="card card-square list-item">
+          <div class="card-title" />
+          <div class="card-content">
+            <div class="day">
+              <%= DateFormatter.day(call.scheduled_on) %>
+            </div>
+            <div class="month">
+              <%= DateFormatter.small_month_day(call.scheduled_on) %>
+            </div>
+            <div class="time">
+              <%= DateFormatter.time(call.scheduled_on) %>
+            </div>
+          </div>
+          <div class="card-footer">
+            <%= link_to "Edit", edit_call_path(call) %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

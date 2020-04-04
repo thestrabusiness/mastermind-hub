@@ -16,6 +16,10 @@ class Group < ApplicationRecord
     validates :call_day
   end
 
+  def self.call_day_options
+    call_days.map { |k, _| [k.capitalize, k] }
+  end
+
   def next_call(call)
     calls.after(call.scheduled_on).first
   end

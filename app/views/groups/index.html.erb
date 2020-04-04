@@ -1,0 +1,38 @@
+<div class="centered-content column">
+  <div class="title">
+    Your Groups
+  </div>
+  <div class="top-link">
+    <%= link_to "Start a group", new_group_path %>
+  </div>
+
+  <% if @groups.empty? %>
+    <p class="no-records-message">
+      You don't belong to any groups yet.
+    </p>
+    <p class="no-records-message">
+      Take a look at your invites or start your own.
+    </p>
+  <% else %>
+    <div class="card-list">
+      <% @groups.each do |group| %>
+        <%= link_to group_path(group) do %>
+          <div class="card card-small list-item">
+            <div class="card-title">
+              <%= group.name %>
+            </div>
+            <div class="card-content">
+              <%= group.memberships.size %>
+              <%= "member".pluralize(group.memberships.size) %>
+            </div>
+            <div class="card-foot row">
+              <% group.users.limit(5).each do |user| %>
+                <%= UserAvatar.render(user) %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
