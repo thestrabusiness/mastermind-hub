@@ -1,0 +1,52 @@
+<div
+  class="card"
+  data-controller="call-commitments"
+  data-call-id="<%= @page.call.id%>"
+  data-commitment-call-id="<%= commitments.first&.call_id%>"
+  data-current-user-id="<%= current_user.id%>"
+  >
+
+  <div class="card-title">
+    <%= title %>
+  </div>
+
+  <div
+    class="card-content primary-list"
+    data-target="call-commitments.commitmentList"
+    id="<%= dom_id(@page.call, "commitments") if show_form %>"
+    >
+    <% if commitments.empty? %>
+      <div
+        class="list-item"
+        data-target="<%= "call-commitments.emptyMessage" if show_form %>"
+        id="<%= "empty_target" if show_form %>"
+        >
+        <%= empty_message %>
+      </div>
+    <% end %>
+
+    <% commitments.sort_by(&:membership_id).each do |commitment| %>
+      <%= render "commitment",
+        commitment: commitment,
+        viewer: viewer,
+        show_completed: show_completed
+      %>
+    <% end %>
+  </div>
+
+  <div class="card-footer">
+    <% if show_form %>
+      <div id="commitment_form">
+        <div class="title">
+          I'm commiting to
+        </div>
+        <%= form_with model: [@page.call, Commitment.new], remote: true do |form| %>
+          <div class="form-field">
+            <%= form.text_area :body %>
+          </div>
+          <%= form.submit %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

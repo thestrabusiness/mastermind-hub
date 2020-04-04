@@ -1,0 +1,20 @@
+<div class="call-details-container">
+  <div class="call-details-columns">
+    <div class="title">
+      <%= @page.call_title_text %>
+    </div>
+
+    <div class="back-link">
+      <%= link_to "Back to #{@page.group.name}", group_path(@page.group) %>
+    </div>
+
+    <div class="column.column-left">
+      <%= render "commitment_cards" %>
+    </div>
+
+    <div class="column.column-left">
+      <%= render "timer_card" %>
+      <%= render "notes_card" %>
+    </div>
+  </div>
+</div>

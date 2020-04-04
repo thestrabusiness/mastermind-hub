@@ -1,0 +1,26 @@
+<div
+  class="card timer"
+  data-controller="timer"
+  data-call-id="<%= @page.call.id%>"
+  >
+
+  <div class="card-title">
+    Timer
+  </div>
+
+  <div class="card-content">
+    <%= render "timer_details", page: @page %>
+  </div>
+
+  <div class="card-footer">
+    <% if @page.viewer_is_facilitator? %>
+      <%= render "timer_form", page: @page %>
+    <% end %>
+  </div>
+
+  <audio
+    src="http://static1.grsites.com/archive/sounds/musical/musical009.mp3"
+    data-target="timer.alert"
+    controls="false"
+    >
+</div>
