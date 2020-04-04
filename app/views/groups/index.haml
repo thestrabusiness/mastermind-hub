@@ -22,6 +22,6 @@
               members
             .card-footer.row
               - group.users.take(5).each do |user|
-                .avatar= user.initials
+                = UserAvatar.render(user)
 
 
