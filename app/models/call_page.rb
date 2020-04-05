@@ -59,7 +59,7 @@ class CallPage
   attr_reader :viewer
 
   def call_date_text
-    DateFormatter.month_day_time(call.scheduled_on)
+    DateTimeFormatter.month_day_time(call.scheduled_on)
   end
 
   def call_label
