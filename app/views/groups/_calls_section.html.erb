@@ -6,7 +6,7 @@
     <% calls.each do |call| %>
       <%= link_to call_path(call) do %>
         <div class="card card-square list-item">
-          <div class="card-title" />
+          <div class="card-title"></div>
           <div class="card-content">
             <div class="day">
               <%= DateFormatter.day(call.scheduled_on) %>

@@ -25,7 +25,7 @@
               <%= group.memberships.size %>
               <%= "member".pluralize(group.memberships.size) %>
             </div>
-            <div class="card-foot row">
+            <div class="card-footer row">
               <% group.users.limit(5).each do |user| %>
                 <%= UserAvatar.render(user) %>
               <% end %>
