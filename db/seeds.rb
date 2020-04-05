@@ -39,13 +39,17 @@ group = Group.create!(name: 'Fellas', creator: anthony, call_time: '16:00')
 group.memberships.create!(user: anthony, role: Membership::FACILITATOR)
 group.users << [kurt, eric, tad, joe]
 
-last_call = group.calls.create!(scheduled_on: Date.current - 7.days)
-todays_call = group.calls.create!(scheduled_on: Date.current)
-group.calls.create!(scheduled_on: Date.current - 14.days)
+upcoming_call = group.upcoming_call
+todays_call = group
+  .calls
+  .create!(scheduled_on: upcoming_call.scheduled_on - 7.days)
+previous_call = group
+  .calls
+  .create!(scheduled_on: upcoming_call.scheduled_on - 14.days)
 
 group.memberships.each do |member|
   body = "#{member.user.first_name}'s commitment"
-  last_call.commitments.create!(membership: member, body: body)
+  previous_call.commitments.create!(membership: member, body: body)
 end
 
 Timer.create!(user: kurt, call: todays_call)
