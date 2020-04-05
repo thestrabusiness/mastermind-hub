@@ -11,8 +11,6 @@ gem "clearance"
 gem "dotenv-rails"
 gem "erb_lint", require: false
 gem "factory_bot_rails"
-gem "haml"
-gem "haml-rails"
 gem "octicons_helper"
 gem "pg"
 gem "pry"
