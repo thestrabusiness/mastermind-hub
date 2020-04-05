@@ -2,15 +2,18 @@
   class="card card-large"
   data-controller="call-notes"
   data-call-id="<%= @page.call.id %>"
-  data-current_user-id="<%= current_user.id %>">
+  data-current-user-id="<%= current_user.id %>">
 
   <div class="card-title">
     Notes
   </div>
 
-  <div class="card-content primary-list">
+  <div
+    class="card-content primary-list"
+    id="notes_container"
+    data-target="call-notes.list">
     <% @page.notes.each do |note| %>
-      <%= render "notes", note: note %>
+      <%= render "note", note: note %>
     <% end %>
   </div>
 
