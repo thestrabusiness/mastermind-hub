@@ -50,9 +50,25 @@ class CallPage
     call.notes
   end
 
+  def call_title_text
+    "#{call_label} #{call_date_text}"
+  end
+
   private
 
   attr_reader :viewer
+
+  def call_date_text
+    DateFormatter.month_day_time(call.scheduled_on)
+  end
+
+  def call_label
+    if viewing_todays_call?
+      "Today's Call: "
+    else
+      "Call on:"
+    end
+  end
 
   def todays_call
     group.todays_call

@@ -1,0 +1,11 @@
+<div class="sign-up" id="clearance">
+  <h2><%= t(".title") %></h2>
+
+  <% if @user.errors.present? %>
+    <div class="errors">
+      Please fill out all fields
+    </div>
+  <% end %>
+
+  <%= render "/users/form" %>
+</div>

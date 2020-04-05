@@ -9,9 +9,8 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "chronic", require: false
 gem "clearance"
 gem "dotenv-rails"
+gem "erb_lint", "0.0.29", require: false
 gem "factory_bot_rails"
-gem "haml"
-gem "haml-rails"
 gem "octicons_helper"
 gem "pg"
 gem "pry"

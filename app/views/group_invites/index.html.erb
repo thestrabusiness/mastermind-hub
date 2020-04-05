@@ -1,0 +1,22 @@
+<div class="centered-content column">
+  <div class="title">
+    Pending invites
+  </div>
+  <div class="primary-list">
+    <% @group_invites.each do |invite| %>
+      <div class="list-item">
+        <%= invite.created_at.strftime("%m/%d/%y") %>
+        <%= invite.group.name %>
+        <div class="actions">
+          <%= link_to "Accept", accept_group_invite_path(invite), method: :post %>
+          <%= link_to "Reject", reject_group_invite_path(invite), method: :post %>
+        </div>
+      </div>
+    <% end %>
+    <% if @group_invites.empty? %>
+      <div class="list-item">
+        You don't have any pending invites
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -26,6 +26,12 @@ module CallCommitmentHelper
     commitment.completed ? "green" : "red"
   end
 
+  def edit_commitment_alert(commitment)
+    return unless commitment.call.past_call?
+
+    "This is a past commitment. Are you sure you want to edit it?"
+  end
+
   private
 
   def confirm_path(commitment)

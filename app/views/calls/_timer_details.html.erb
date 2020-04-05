@@ -1,0 +1,19 @@
+<div class="timer-details" data-target="timer.details">
+  <% if page.timer.nil? %>
+    <div class="timer-name">
+      No timer started yet
+    </div>
+  <% else %>
+    <div class="timer-name">
+      <%= page.timer.user.first_plus_initial %>
+    </div>
+    <div class="timer-container">
+      <div
+        id="timer"
+        data-target="timer.countdown"
+        data-timer-end="<%= page.timer.ends_at_for_js %>">
+        <%= page.timer.initial_text %>
+      </div>
+    </div>
+  <% end %>
+</div>
