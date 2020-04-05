@@ -23,9 +23,16 @@ If you want to contribute to this project:
 * Open a new issue to discuss any problems or features you're interested in
 
 
-## Rubocop
+## Style checks and linting
 
-Rubocop is included in the Gemfile. Please run it with the `-a` flag:
+Rubocop, erblint and eslint are included in the Gemfile and package.json you can
+run them to automatically fix any issues that Hound might find:
 
+Ruby:
 `rubocop -a`
 
+ERB Templates:
+`erblint --lint-all -a`
+
+JavaScript:
+`yarn eslint app/javascript/**`
