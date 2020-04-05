@@ -130,7 +130,7 @@ GEM
       railties (>= 3.2, < 6.1)
     email_validator (2.0.1)
       activemodel
-    erb_lint (0.0.30)
+    erb_lint (0.0.29)
       activesupport
       better_html (~> 1.0.7)
       html_tokenizer
@@ -297,7 +297,7 @@ DEPENDENCIES
   chronic
   clearance
   dotenv-rails
-  erb_lint
+  erb_lint (= 0.0.29)
   factory_bot_rails
   listen (>= 3.0.5, < 3.2)
   octicons_helper

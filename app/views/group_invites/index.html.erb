@@ -5,7 +5,7 @@
   <div class="primary-list">
     <% @group_invites.each do |invite| %>
       <div class="list-item">
-        <%= invite.created_at.strftime('%m/%d/%y') %>
+        <%= invite.created_at.strftime("%m/%d/%y") %>
         <%= invite.group.name %>
         <div class="actions">
           <%= link_to "Accept", accept_group_invite_path(invite), method: :post %>
