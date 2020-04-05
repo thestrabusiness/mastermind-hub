@@ -1,27 +1,28 @@
-import { Controller } from "stimulus"
-import consumer from "../channels/consumer"
+import { Controller } from "stimulus";
+import consumer from "../channels/consumer";
 
 export default class extends Controller {
-  static targets = ['alert', 'countdown', 'details']
+  static targets = ["alert", "countdown", "details"];
 
-  initialize() { 
+  initialize() {
     this.alertTarget.volume = 0.4;
   }
 
   connect() {
     let timerController = this;
     this.timerContainer = this.element;
-    this.callId = this.timerContainer.getAttribute('data-call-id')
+    this.callId = this.timerContainer.getAttribute("data-call-id");
 
-    if (this.hasCountdownTarget) { 
+    if (this.hasCountdownTarget) {
       this.updateTimer();
     }
 
-    this.subscription = consumer.subscriptions.create({
-          channel: "TimerChannel",
-          call_id: this.callId,
-        }, {
-
+    this.subscription = consumer.subscriptions.create(
+      {
+        channel: "TimerChannel",
+        call_id: this.callId,
+      },
+      {
         connected() {
           // Called when the subscription is ready for use on the server
         },
@@ -33,26 +34,26 @@ export default class extends Controller {
         received(data) {
           timerController.detailsTarget.innerHTML = data.html;
           timerController.updateTimer();
-        }
-      });
+        },
+      }
+    );
   }
 
-  disconnect() { 
+  disconnect() {
     this.subscription.unsubscribe();
-    if (window.timerInterval) { 
-      window.clearInterval(window.timerInterval)
+    if (window.timerInterval) {
+      window.clearInterval(window.timerInterval);
     }
   }
 
-
   updateTimer() {
     this.clearTimer();
-    const timerEndData = this.countdownTarget.getAttribute('data-timer-end');
+    const timerEndData = this.countdownTarget.getAttribute("data-timer-end");
     const endTime = new Date(timerEndData).getTime();
     console.log(this.countdownTarget);
 
     window.timerInterval = setInterval(() => {
-      const now = new Date().getTime()
+      const now = new Date().getTime();
       const distance = endTime - now;
       // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -68,12 +69,12 @@ export default class extends Controller {
         this.clearTimer();
         this.countdownTarget.innerHTML = "TIMES UP";
       }
-    })
+    });
   }
 
-    clearTimer() { 
-      if (window.timerInterval) { 
-        window.clearInterval(window.timerInterval)
-      }
+  clearTimer() {
+    if (window.timerInterval) {
+      window.clearInterval(window.timerInterval);
     }
+  }
 }
