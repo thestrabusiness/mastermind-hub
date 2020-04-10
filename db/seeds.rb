@@ -1,5 +1,12 @@
 require 'chronic'
 
+admin = User.create!(
+  email: 'admin@example.com',
+  password: 'password',
+  first_name: 'Admin',
+  last_name: 'Istrator'
+)
+
 anthony = User.create!(
   email: 'anthony@example.com',
   password: 'password',
@@ -35,9 +42,9 @@ tad = User.create!(
   last_name: 'Test'
 )
 
-group = Group.create!(name: 'Fellas', creator: anthony, call_time: '16:00')
-group.memberships.create!(user: anthony, role: Membership::FACILITATOR)
-group.users << [kurt, eric, tad, joe]
+group = Group.create!(name: 'Fellas', creator: admin, call_time: '16:00')
+group.memberships.create!(user: admin, role: Membership::FACILITATOR)
+group.users << [anthony, eric, kurt, tad, joe]
 
 upcoming_call = group.upcoming_call
 todays_call = group
