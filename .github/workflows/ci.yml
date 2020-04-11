@@ -34,10 +34,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - name: Set up Ruby 2.7
+      - name: Set up Ruby 2.7.1
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.7.0
+          ruby-version: 2.7.1
 
       - name: Install dependencies
         run: sudo apt-get install libpq-dev
