@@ -11,11 +11,20 @@ RSpec.describe ApplicationController do
     routes.draw { get "test_tz_cookie" => "anonymous#test_tz_cookie" }
   end
 
+  before do
+    allow(Time).to receive(:zone).and_call_original
+  end
+
+  after do
+    utc = ActiveSupport::TimeZone.all.detect { |tz| tz.name == "UTC" }
+    allow(Time).to receive(:zone).and_return(utc)
+  end
+
   it "sets the application's time zone to the browser time zone" do
     cookies[:timezone] = "America/New_York"
 
     get :test_tz_cookie
 
-    Time.zone.name == "Eastern Time (US & Canada)"
+    expect(Time.zone.name).to eq "Eastern Time (US & Canada)"
   end
 end
