@@ -8,6 +8,8 @@ class Membership < ApplicationRecord
   MEMBER = "member"
   ROLES = [FACILITATOR, MEMBER].freeze
 
+  validates :user, uniqueness: { scope: :group }
+
   ROLES.each do |role|
     define_method "#{role}?" do
       self.role == role
