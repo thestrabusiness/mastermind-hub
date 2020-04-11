@@ -1,0 +1,17 @@
+---
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  web:
+    command: ["/mastermind-hub/bin/rails", "server", "--port=3000", "--binding=0.0.0.0"]
+    depends_on:
+      - db
+    entrypoint: entrypoint.sh
+    expose:
+      - "3000"
+    image: mastermind-hub:latest
+    ports:
+      - 3000:3000
