@@ -35,3 +35,8 @@
 yarn-debug.log*
 .yarn-integrity
 .env
+
+# Files and directories created by RubyMine IDE
+.generators
+.idea/
+.rakeTasks
