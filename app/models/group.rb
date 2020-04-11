@@ -12,8 +12,9 @@ class Group < ApplicationRecord
                   :saturday]
 
   with_options presence: true do
-    validates :name
     validates :call_day
+    validates :call_time
+    validates :name
   end
 
   def self.call_day_options
@@ -52,9 +53,9 @@ class Group < ApplicationRecord
 
   def next_call_date
     if call_day_before_type_cast == Date.current.wday
-      Chronic.parse("next #{call_day}")
+      Chronic.parse("next #{call_day} at #{DateTimeFormatter.time(call_time)}")
     else
-      Chronic.parse("this #{call_day}")
+      Chronic.parse("this #{call_day} at #{DateTimeFormatter.time(call_time)}")
     end
   end
 end

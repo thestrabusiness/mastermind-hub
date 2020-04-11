@@ -1,6 +1,6 @@
 <div class="centered-form">
   <h2>
-    Edit call on <%= DateFormatter.month_day(@call.scheduled_on) %>
+    Edit call on <%= DateTimeFormatter.month_day(@call.scheduled_on) %>
   </h2>
 
   <%= form_with model: @call do |form| %>

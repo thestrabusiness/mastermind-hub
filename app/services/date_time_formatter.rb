@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class DateFormatter
+class DateTimeFormatter
   def self.month_day_time(datetime)
-    datetime.strftime("%A, %B %e at %l %p %Z")
+    datetime.strftime("%A, %B %e at %l:%M %p %Z")
   end
 
   def self.month_day(datetime)
@@ -10,11 +10,11 @@ class DateFormatter
   end
 
   def self.time_with_zone(datetime)
-    datetime.strftime("%l:%m %p %Z")
+    datetime.strftime("%l:%M %p %Z")
   end
 
   def self.time(datetime)
-    datetime.strftime("%l:%m %p")
+    datetime.strftime("%l:%M %p")
   end
 
   def self.small_month_day(datetime)

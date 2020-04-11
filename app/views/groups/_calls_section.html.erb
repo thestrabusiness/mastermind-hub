@@ -9,13 +9,13 @@
           <div class="card-title"></div>
           <div class="card-content">
             <div class="day">
-              <%= DateFormatter.day(call.scheduled_on) %>
+              <%= DateTimeFormatter.day(call.scheduled_on) %>
             </div>
             <div class="month">
-              <%= DateFormatter.small_month_day(call.scheduled_on) %>
+              <%= DateTimeFormatter.small_month_day(call.scheduled_on) %>
             </div>
             <div class="time">
-              <%= DateFormatter.time(call.scheduled_on) %>
+              <%= DateTimeFormatter.time(call.scheduled_on) %>
             </div>
           </div>
           <div class="card-footer">
