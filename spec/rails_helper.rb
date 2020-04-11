@@ -23,6 +23,11 @@ RSpec.configure do |config|
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
   end
+
+  config.before(:each) do
+    utc = ActiveSupport::TimeZone.all.detect { |tz| tz.name == "UTC" }
+    allow(Time).to receive(:zone).and_return(utc)
+  end
 end
 
 RSpec.configure do |config|
