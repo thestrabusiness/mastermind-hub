@@ -11,7 +11,7 @@
       <div
         id="timer"
         data-target="timer.countdown"
-        data-timer-end="<%= page.timer.ends_at_for_js %>">
+        data-timer-end="<%= page.timer.ends_at.utc.to_s %>">
         <%= page.timer.initial_text %>
       </div>
     </div>
