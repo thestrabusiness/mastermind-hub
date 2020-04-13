@@ -8,6 +8,9 @@
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "timezone", 'data-turbolinks-track': "reload" %>
+    <% if Rails.env.test? %>
+      <%= javascript_pack_tag "mock_time" %>
+    <% end %>
   </head>
   <body>
     <% if signed_in? %>
