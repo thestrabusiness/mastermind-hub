@@ -8,6 +8,7 @@
     "@rails/webpacker": "4.2.2",
     "jstz": "^2.1.1",
     "minimist": "^1.2.2",
+    "sinon": "^9.0.2",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
