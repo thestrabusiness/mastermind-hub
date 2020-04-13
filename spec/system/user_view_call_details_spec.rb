@@ -132,6 +132,27 @@ RSpec.describe "User views call details page", js: true do
         expect(page).to have_content timer.user.first_plus_initial
       end
     end
+
+    it "displays the time remaining" do
+      freeze_time do
+        unix_time = (Time.now.to_f * 1000).to_i
+        timer = create(:timer, duration: 15.minutes)
+        user = create(:user, group_ids: [timer.call.group_id])
+
+        visit call_path(timer.call, as: user)
+        page.execute_script("mockTime(#{unix_time})")
+
+        within(".timer-details") do
+          expect(page).to have_content "15m 0s"
+        end
+
+        page.execute_script("mockTime(#{unix_time + 1})")
+
+        within(".timer-details") do
+          expect(page).to have_content "14m 59s"
+        end
+      end
+    end
   end
 
   context "As a 'member'" do

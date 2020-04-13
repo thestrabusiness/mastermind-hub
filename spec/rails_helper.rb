@@ -38,4 +38,5 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include ActionView::RecordIdentifier
+  config.include ActiveSupport::Testing::TimeHelpers
 end
