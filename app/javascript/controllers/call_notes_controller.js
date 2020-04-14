@@ -26,9 +26,9 @@ export default class extends Controller {
           // Called when the subscription has been terminated by the server
         },
 
-        received(message) {
-          if (message.author_id !== controller.currentUserId) {
-            controller.appendNewMessage(message);
+        received(data) {
+          if (data.author_id !== controller.currentUserId) {
+            controller.listTarget.insertAdjacentHTML("beforeend", data.html);
           }
         },
       }
@@ -37,17 +37,5 @@ export default class extends Controller {
 
   disconnect() {
     this.subscription.unsubscribe();
-  }
-
-  appendNewMessage(message) {
-    const newMessageNode = document.createElement("div");
-    newMessageNode.className = "list-item";
-
-    const textNode = document.createTextNode(
-      `${message.author} ${message.body}`
-    );
-    newMessageNode.appendChild(textNode);
-
-    this.listTarget.appendChild(newMessageNode);
   }
 }
