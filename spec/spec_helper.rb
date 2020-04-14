@@ -11,11 +11,3 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
-
-shared_context "user in an active call" do
-  before do
-    user = create(:user, :with_group)
-    call = create(:call, group: user.groups.first)
-    visit call_path(call, as: user)
-  end
-end

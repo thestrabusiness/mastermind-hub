@@ -2,16 +2,19 @@
 
 require "rails_helper"
 
-RSpec.describe "user creates a note", js: true do
-  context "when the current user creates a note" do
-    include_context "user in an active call"
+RSpec.describe "User creates a note", js: true do
+  context "when the user successfully creates note" do
+    it "display the user's first name, a colon, and then their note" do
+      user = create(:user, :with_group)
+      call = create(:call, group: user.groups.first)
+      note_body = "this is my note"
 
-    describe "creating a new note" do
-      it "formats the user's first name, a colon, and then their note" do
-        fill_in "note_body", with: "this is my note"
-        click_on "Create Note"
-        expect(page).to have_content /Elon:\s+this is my note/
-      end
+      visit call_path(call, as: user)
+      fill_in "note_body", with: note_body
+      click_on "Create Note"
+
+      expect(page).to have_content("#{user.first_name}:")
+      expect(page).to have_content(note_body)
     end
   end
 end
