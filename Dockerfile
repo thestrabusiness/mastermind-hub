@@ -6,18 +6,21 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.lis
 
 RUN apt-get update  --yes
 RUN apt-get upgrade --yes
+RUN apt-get install --yes libpq-dev
 RUN apt-get install --yes nodejs
 RUN apt-get install --yes yarn
 RUN apt-get install --yes postgresql-client
 
 ENV APP_ROOT /mastermind-hub
+ENV RAILS_ENV development
 RUN mkdir -p $APP_ROOT
 WORKDIR $APP_ROOT
 
 # Install gems
 COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
-RUN bundle install --no-color
+RUN bundle config path vendor/bundle
+RUN bundle install --no-color --jobs 4 --retry 3
 
 # Install node packages
 COPY package.json $APP_ROOT/package.json

@@ -2,23 +2,33 @@
 version: '3'
 services:
   db:
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
   web:
-    command: ["/mastermind-hub/bin/rails", "server", "--port=3000", "--binding=0.0.0.0"]
+    command: >
+      bash -c "/mastermind-hub/bin/rails db:test:prepare
+      && /mastermind-hub/bin/rails spec"
     volumes:
       - ./app:/mastermind-hub/app
       - ./bin:/mastermind-hub/bin
       - ./config:/mastermind-hub/config
       - ./db:/mastermind-hub/db
+      - ./spec:/mastermind-hub/spec
       - ./public:/mastermind-hub/public
     depends_on:
       - db
     expose:
       - "3000"
     environment:
-      - APPLICATION_HOST='localhost:3000'
+      - APPLICATION_HOST=host
+      - RAILS_ENV=test
+      - PGHOST=localhost
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
     image: mastermind-hub:latest
     ports:
       - 3000:3000
