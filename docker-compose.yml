@@ -17,6 +17,8 @@ services:
       - db
     expose:
       - "3000"
+    environment:
+      - APPLICATION_HOST='localhost:3000'
     image: mastermind-hub:latest
     ports:
       - 3000:3000

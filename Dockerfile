@@ -24,7 +24,6 @@ COPY package.json $APP_ROOT/package.json
 COPY yarn.lock $APP_ROOT/yarn.lock
 RUN yarn install --cwd $APP_ROOT --check-files --ignore-optional --no-progress
 
-COPY .env $APP_ROOT/.env
 COPY babel.config.js $APP_ROOT/babel.config.js
 COPY config.ru $APP_ROOT/config.ru
 COPY postcss.config.js $APP_ROO/postcss.config.js
