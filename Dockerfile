@@ -24,13 +24,6 @@ COPY package.json $APP_ROOT/package.json
 COPY yarn.lock $APP_ROOT/yarn.lock
 RUN yarn install --cwd $APP_ROOT --check-files --ignore-optional --no-progress
 
-# Copy the Rails application and configuration files
-COPY app $APP_ROOT/app
-COPY bin $APP_ROOT/bin
-COPY config $APP_ROOT/config
-COPY db $APP_ROOT/db
-COPY public $APP_ROOT/public
-
 COPY .env $APP_ROOT/.env
 COPY babel.config.js $APP_ROOT/babel.config.js
 COPY config.ru $APP_ROOT/config.ru

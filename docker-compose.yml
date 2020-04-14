@@ -7,6 +7,12 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
   web:
     command: ["/mastermind-hub/bin/rails", "server", "--port=3000", "--binding=0.0.0.0"]
+    volumes:
+      - ./app:/mastermind-hub/app
+      - ./bin:/mastermind-hub/bin
+      - ./config:/mastermind-hub/config
+      - ./db:/mastermind-hub/db
+      - ./public:/mastermind-hub/public
     depends_on:
       - db
     entrypoint: entrypoint.sh
