@@ -15,7 +15,6 @@ services:
       - ./public:/mastermind-hub/public
     depends_on:
       - db
-    entrypoint: entrypoint.sh
     expose:
       - "3000"
     image: mastermind-hub:latest

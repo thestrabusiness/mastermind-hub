@@ -30,6 +30,3 @@ COPY config.ru $APP_ROOT/config.ru
 COPY postcss.config.js $APP_ROO/postcss.config.js
 COPY Rakefile $APP_ROOT/Rakefile
 
-# Add a script to be executed every time the container starts
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
