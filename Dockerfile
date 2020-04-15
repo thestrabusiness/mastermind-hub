@@ -6,21 +6,26 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.lis
 
 RUN apt-get update  --yes
 RUN apt-get upgrade --yes
-RUN apt-get install --yes libpq-dev
-RUN apt-get install --yes nodejs
-RUN apt-get install --yes yarn
-RUN apt-get install --yes postgresql-client
+RUN apt-get install --yes --no-install-recommends build-essential
+RUN apt-get install --yes --no-install-recommends libpq-dev
+RUN apt-get install --yes --no-install-recommends nodejs
+RUN apt-get install --yes --no-install-recommends yarn
+RUN apt-get install --yes --no-install-recommends postgresql-client
 
 ENV APP_ROOT /mastermind-hub
-ENV RAILS_ENV development
+ENV BUNDLE_PATH $APP_ROOT/bundle
+ENV BUNDLE_BIN $BUNDLE_PATH/bin
+ENV GEM_HOME $BUNDLE_PATH
+ENV RAILS_ENV test
+ENV PATH "${BUNDLE_BIN}:${PATH}"
+
 RUN mkdir -p $APP_ROOT
 WORKDIR $APP_ROOT
 
 # Install gems
 COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
-RUN bundle config path vendor/bundle
-RUN bundle install --no-color --jobs 4 --retry 3
+RUN bundle install --binstubs="$BUNDLE_BIN" --no-color --jobs 4 --retry 3
 
 # Install node packages
 COPY package.json $APP_ROOT/package.json
@@ -31,4 +36,3 @@ COPY babel.config.js $APP_ROOT/babel.config.js
 COPY config.ru $APP_ROOT/config.ru
 COPY postcss.config.js $APP_ROO/postcss.config.js
 COPY Rakefile $APP_ROOT/Rakefile
-
