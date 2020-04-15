@@ -22,7 +22,7 @@ RSpec.configure do |config|
     driven_by :selenium,
               using: :headless_chrome,
               screen_size: [1400, 1400],
-              options: { url: "http://localhost:4444/wd/hub" }
+              options: { url: "http://172.28.0.2:4444/wd/hub" }
   end
 
   config.before(:each) do

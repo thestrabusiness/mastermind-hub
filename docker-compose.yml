@@ -16,9 +16,7 @@ services:
       - mastermind-net
 
   web:
-    command: >
-      bash -c "/mastermind-hub/bin/rails db:test:prepare
-      && /mastermind-hub/bin/rails spec"
+    command: bash -c "rails db:test:prepare && rails spec"
     volumes:
       - ./app:/mastermind-hub/app
       - ./bin:/mastermind-hub/bin
