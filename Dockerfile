@@ -25,7 +25,8 @@ WORKDIR $APP_ROOT
 # Install gems
 COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
-RUN bundle install --binstubs="$BUNDLE_BIN" --no-color --jobs 4 --retry 3
+RUN bundle install --no-color --jobs 4
+RUN bundle binstubs --no-color --all --path $BUNDLE_BIN
 
 # Install node packages
 COPY package.json $APP_ROOT/package.json
