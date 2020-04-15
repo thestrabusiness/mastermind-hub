@@ -7,8 +7,10 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "rails/test_help"
 
-class ActiveSupport::TestCase
+module ActiveSupport
+  class TestCase
     parallelize(workers: :number_of_processors)
+  end
 end
 
 RSpec.configure do |config|
@@ -18,9 +20,9 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium,
-      using: :headless_chrome,
-      screen_size: [1400, 1400],
-      options: { url: "http://localhost:4444/wd/hub" }
+              using: :headless_chrome,
+              screen_size: [1400, 1400],
+              options: { url: "http://localhost:4444/wd/hub" }
   end
 
   config.before(:each) do
