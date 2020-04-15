@@ -1,5 +1,9 @@
 ---
 version: '3'
+
+networks:
+  mastermind-net:
+
 services:
   db:
     environment:
@@ -8,6 +12,9 @@ services:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+    networks:
+      - mastermind-net
+
   web:
     command: >
       bash -c "/mastermind-hub/bin/rails db:test:prepare
@@ -21,26 +28,44 @@ services:
       - ./public:/mastermind-hub/public
     depends_on:
       - db
-    expose:
-      - "3000"
+      - chrome
+    tty: true
     environment:
       - APPLICATION_HOST=host
-      - RAILS_ENV=test
       - PGHOST=localhost
-      - PGUSER=postgres
       - PGPASSWORD=postgres
+      - PGUSER=postgres
+      - RAILS_ENV=test
+      - SELENIUM_HOST=selenium-hub
+      - SELENIUM_PORT=4444
+      - TEST_APP_HOST=web
+      - TEST_PORT=3000
     image: mastermind-hub:latest
     ports:
       - 3000:3000
+      - 3001:3001
+    networks:
+      mastermind-net:
+        aliases:
+          - mastermind-hub.com
+
   selenium-hub:
     image: selenium/hub:latest
     container_name: selenium-hub
     ports:
       - 4444:4444
+      - 5900:5900
+    networks:
+      - mastermind-net
+
   chrome:
     image: selenium/node-chrome:latest
+    volumes:
+      - /dev/shm:/dev/shm
     depends_on:
       - selenium-hub
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
+    networks:
+      - mastermind-net

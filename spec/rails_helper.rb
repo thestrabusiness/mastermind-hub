@@ -3,17 +3,9 @@
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../config/environment", __dir__)
-if Rails.env.production?
-  abort("The Rails environment is running in production mode!")
-end
-require "rspec/rails"
 
-begin
-  ActiveRecord::Migration.maintain_test_schema!
-rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
-  exit 1
-end
+require "rspec/rails"
+require "rails/test_help"
 
 class ActiveSupport::TestCase
     parallelize(workers: :number_of_processors)
