@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: bash -c "bin/rails s -p 3000 -b 0.0.0.0"
+    environment:
+      - PGHOST=db
+      - PGUSER=postgres
+    volumes:
+      - .:/mastermind-hub
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
