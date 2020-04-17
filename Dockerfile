@@ -9,7 +9,7 @@ RUN apt-get install -y \
       libpq-dev \
       nodejs \
       yarn \
-      postgresql-client \
+      postgresql-client 
 
 # Install chrome dependencies
 RUN apt-get install -y \
