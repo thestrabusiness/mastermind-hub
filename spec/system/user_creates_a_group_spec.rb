@@ -18,6 +18,16 @@ RSpec.describe "User creates a group", js: true do
     expect(page).to have_content group_name
   end
 
+  it "shows the email field after an invalid submission" do
+    user = create(:user)
+    visit new_group_path(as: user)
+
+    fill_in "Name", with: ""
+    click_on "Create Group"
+
+    expect(page).to have_selector "#emails"
+  end
+
   it "assigns them as the facilitator" do
     user = create(:user)
     group_name = "New Group"
