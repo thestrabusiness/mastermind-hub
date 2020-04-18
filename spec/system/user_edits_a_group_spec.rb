@@ -4,6 +4,15 @@ require "rails_helper"
 
 RSpec.describe "User visits edit group page" do
   context "as the group owner" do
+    it "doesn't see the emails field" do
+      user = create(:user, :with_group)
+      group = user.groups.first
+
+      visit edit_group_path(group, as: user)
+
+      expect(page).to_not have_selector "#emails"
+    end
+
     context "clicks the trashcan link" do
       it "removes the group from their list" do
         user = create(:user, :with_group)
