@@ -9,7 +9,7 @@
     <%= link_to "Edit #{@group.name}", edit_group_path(@group) %>
   </div>
   <div class="top-link">
-    Created by: <%= @group.facilitator.full_name %>
+    Created by: <%= @group.creator.full_name %>
   </div>
 
   <% if @group.todays_call.present? %>
