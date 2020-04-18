@@ -6,8 +6,7 @@
 
     <div class="form-field">
       <%= form.label :call_day %>
-      <%= form.select :call_day,
-                      options_for_select(Group.call_day_options) %>
+      <%= form.select :call_day, options_for_select(Group.call_day_options) %>
     </div>
 
     <div class="form-field">
@@ -24,5 +23,18 @@
       </div>
     <% end %>
 
-    <%= form.submit %>
+    <div class="form-buttons">
+      <div></div>
+      <%= form.submit %>
+      <% if @group.persisted? %>
+        <%= link_to group_path(@group),
+          id: "delete_group",
+          method: :delete,
+          data:{ confirm: "Are you sure you want to delete this group? This is permanent." } do %>
+          <%= octicon "trashcan", class: "red", height: 30 %>
+        <% end %>
+      <% else %>
+        <div></div>
+      <% end %>
+    </div>
 <% end %>

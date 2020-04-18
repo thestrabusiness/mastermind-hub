@@ -2,9 +2,9 @@
 
 class Call < ApplicationRecord
   belongs_to :group
-  has_many :commitments
-  has_many :notes
-  has_many :timers
+  has_many :commitments, dependent: :destroy
+  has_many :notes, dependent: :destroy
+  has_many :timers, dependent: :destroy
   has_many :users, through: :group
 
   default_scope { order(scheduled_on: :asc) }
