@@ -21,4 +21,25 @@ RSpec.describe GroupInviter do
 
     expect(GroupInviteMailer).to have_received(:invite)
   end
+
+  it "doesn't send an email if the invitee is the inviter" do
+    allow(GroupInviteMailer).to receive(:invite).and_call_original
+    membership = create(:membership)
+    group = membership.group
+    user = membership.user
+
+    GroupInviter.perform(user.email, group, user)
+
+    expect(GroupInviteMailer).to_not have_received(:invite)
+  end
+
+  it "doesn't create an invite if the invitee is the inviter" do
+    membership = create(:membership)
+    group = membership.group
+    user = membership.user
+
+    GroupInviter.perform(user.email, group, user)
+
+    expect(GroupInvite.where(email: user.email).exists?).to be false
+  end
 end
