@@ -15,13 +15,18 @@ Rails.application.routes.draw do
     resource :timer, only: :create
   end
 
-  resources :groups
+  resources :groups do
+    scope module: :groups do
+      resources :group_invites, only: [:index, :create, :destroy]
+    end
+  end
 
-  resources :group_invites do
+  resources :group_invites, only: :index do
     member do
       post 'accept'
       post 'reject'
     end
   end
+
   resources :users, only: :create
 end
