@@ -15,13 +15,13 @@ RSpec.describe "User manages group invites" do
     end
   end
 
-  it "retracts outstanding group invites" do
+  it "rescinds outstanding group invites" do
     user = create(:user, :with_group)
     group = user.groups.first
     invite = create(:group_invite, group: group)
 
     visit group_group_invites_path(group, as: user)
-    click_on "Retract"
+    click_on "Rescind"
 
     expect(page.current_path).to eq group_group_invites_path(group)
     expect(page).to_not have_content(invite)

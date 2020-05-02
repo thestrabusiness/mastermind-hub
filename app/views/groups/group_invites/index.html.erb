@@ -12,7 +12,7 @@
     <% @group_invites.each do |invite| %>
       <div class="list-item">
         <%= invite.email %>
-        <%= link_to "Retract",
+        <%= link_to "Rescind",
           group_group_invite_path(invite.group, invite),
           method: :delete %>
       </div>
