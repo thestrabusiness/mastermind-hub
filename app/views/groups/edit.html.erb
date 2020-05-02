@@ -1,4 +1,24 @@
 <div class="centered-form">
   <h2>Edit <%= @group.name %></h2>
   <%= render "form" %>
+  <div id="group_members">
+    <h2>Members</h2>
+    <form class="primary-list">
+      <% @group.memberships.each do |membership| %>
+        <div class="list-item space-between">
+          <div><%= membership.user.full_name %></div>
+          <div>
+            <% unless current_user == membership.user %>
+              <%= link_to group_membership_path(@group, membership),
+                id: "delete_member_#{membership.id}",
+                method: :delete,
+                data: { confirm: "Are you sure you want to remove this member? This is permanent." } do %>
+                <%= octicon "trashcan", class: "red", height: 15 %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </form>
+  </div>
 </div>
