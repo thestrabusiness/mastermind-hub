@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <% if action_name == "new" %>
+    <% if !@group.persisted? %>
       <div class="form-field">
         <%= label_tag :emails %>
         <%= text_field_tag :emails %>
