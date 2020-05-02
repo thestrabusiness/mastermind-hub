@@ -9,6 +9,9 @@
     <%= link_to "Edit #{@group.name}", edit_group_path(@group) %>
   </div>
   <div class="top-link">
+    <%= link_to "Manage Invites", group_group_invites_path(@group) %>
+  </div>
+  <div class="top-link">
     Created by: <%= @group.creator.full_name %>
   </div>
 
