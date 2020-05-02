@@ -16,7 +16,7 @@ class Group < ApplicationRecord
   with_options presence: true do
     validates :call_day
     validates :call_time
-    validates :name
+    validates :name, uniqueness: true
   end
 
   def self.call_day_options
