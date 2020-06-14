@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     scope module: :groups do
       resources :group_invites, only: [:index, :create, :destroy]
     end
+    
+    resources :memberships, only: :destroy
   end
 
   resources :group_invites, only: :index do
