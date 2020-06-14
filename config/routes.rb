@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resource :timer, only: :create
   end
 
-  resources :groups
+  resources :groups do
+    resources :memberships, only: :destroy
+  end
 
   resources :group_invites do
     member do
