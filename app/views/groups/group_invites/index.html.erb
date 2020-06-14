@@ -1,0 +1,21 @@
+<div class="centered-content column">
+  <h2>Send new invites</h2>
+  <%= form_with url: group_group_invites_path(@group) do |form|  %>
+    <p> Add emails separated by commas:</p>
+    <%= form.text_field :emails %>
+    <%= form.submit "Send Invites" %>
+  <% end %>
+</div>
+<div class="centered-content column">
+  <h2>Pending invites</h2>
+  <div class="primary-list">
+    <% @group_invites.each do |invite| %>
+      <div class="list-item">
+        <%= invite.email %>
+        <%= link_to "Rescind",
+          group_group_invite_path(invite.group, invite),
+          method: :delete %>
+      </div>
+    <% end %>
+  </div>
+</div>
