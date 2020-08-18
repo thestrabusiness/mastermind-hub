@@ -11,7 +11,7 @@
       <div
         id="timer"
         data-target="timer.countdown"
-        data-timer-end="<%= page.timer.ends_at.utc.to_s %>">
+        data-timer-end="<%= DateTimeFormatter.ecma_datetime(page.timer.ends_at.utc) %>">
         <%= page.timer.initial_text %>
       </div>
     </div>

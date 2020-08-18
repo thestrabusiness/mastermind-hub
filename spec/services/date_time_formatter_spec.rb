@@ -50,4 +50,13 @@ RSpec.describe DateTimeFormatter do
       expect(formatted_datetime).to eq "Saturday"
     end
   end
+
+  describe "ecma_datetime" do
+    # http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15
+    it "returns a datetime formatted according to the ECMAScript spec" do
+      datetime = Time.parse("2020-04-04 3:31PM UTC")
+      formatted_datetime = DateTimeFormatter.ecma_datetime(datetime)
+      expect(formatted_datetime).to eq "2020-04-04T15:31:00.000Z"
+    end
+  end
 end

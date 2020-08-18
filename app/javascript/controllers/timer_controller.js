@@ -50,7 +50,6 @@ export default class extends Controller {
     this.clearTimer();
     const timerEndData = this.countdownTarget.getAttribute("data-timer-end");
     const endTime = new Date(timerEndData).getTime();
-    console.log(this.countdownTarget);
 
     window.timerInterval = setInterval(() => {
       const now = new Date().getTime();

@@ -24,4 +24,8 @@ class DateTimeFormatter
   def self.day(datetime)
     datetime.strftime("%A")
   end
+
+  def self.ecma_datetime(datetime)
+    datetime.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
+  end
 end
