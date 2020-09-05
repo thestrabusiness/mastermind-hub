@@ -11,7 +11,8 @@
     "serialize-javascript": "^3.1.0",
     "sinon": "^9.0.2",
     "stimulus": "^1.1.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "yargs-parser": "^13.1.2"
   },
   "version": "0.1.0",
   "devDependencies": {
