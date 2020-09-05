@@ -6,30 +6,19 @@ RSpec.describe EnqueueCommitmentReminders do
   describe "perform" do
     context "when a call has a single commitment" do
       it "enqueues the reminder emails" do
-        allow(CommitmentReminderMailer)
-          .to receive(:post_call_reminder).and_call_original
-        allow(CommitmentReminderMailer)
-          .to receive(:mid_week_reminder).and_call_original
-
         call = create(:call)
         create(:commitment,
                call: call,
                membership: create(:membership, group: call.group))
 
-        EnqueueCommitmentReminders.perform(call)
-
-        expect(CommitmentReminderMailer).to have_received(:post_call_reminder)
-        expect(CommitmentReminderMailer).to have_received(:mid_week_reminder)
+        expect do
+          EnqueueCommitmentReminders.perform(call)
+        end.to change { Delayed::Job.count }.by(2)
       end
     end
 
     context "when the call already has a commitment" do
       it "does not enqueue the reminder emails" do
-        allow(CommitmentReminderMailer)
-          .to receive(:post_call_reminder).and_call_original
-        allow(CommitmentReminderMailer)
-          .to receive(:mid_week_reminder).and_call_original
-
         call = create(:call)
         create(:commitment,
                call: call,
@@ -38,10 +27,9 @@ RSpec.describe EnqueueCommitmentReminders do
                call: call,
                membership: create(:membership, group: call.group))
 
-        EnqueueCommitmentReminders.perform(call)
-
-        expect(CommitmentReminderMailer).to_not have_received(:post_call_reminder)
-        expect(CommitmentReminderMailer).to_not have_received(:mid_week_reminder)
+        expect do
+          EnqueueCommitmentReminders.perform(call)
+        end.to_not(change { Delayed::Job.count })
       end
     end
   end

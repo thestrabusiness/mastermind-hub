@@ -8,6 +8,7 @@ ruby "2.7.1"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "chronic", require: false
 gem "clearance"
+gem "delayed_job_active_record"
 gem "dotenv-rails"
 gem "erb_lint", "0.0.29", require: false
 gem "factory_bot_rails"
