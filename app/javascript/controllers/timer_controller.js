@@ -1,6 +1,8 @@
 import { Controller } from "stimulus";
 import consumer from "../channels/consumer";
 
+const FIVE_MINUTES = 1000 * 60 * 5;
+
 export default class extends Controller {
   static targets = ["alert", "countdown", "details"];
 
@@ -9,6 +11,8 @@ export default class extends Controller {
   }
 
   connect() {
+    Notification.requestPermission();
+
     let timerController = this;
     this.timerContainer = this.element;
     this.callId = this.timerContainer.getAttribute("data-call-id");
@@ -48,27 +52,65 @@ export default class extends Controller {
 
   updateTimer() {
     this.clearTimer();
+
     const timerEndData = this.countdownTarget.getAttribute("data-timer-end");
+    const timerUserName = this.countdownTarget.getAttribute("data-timer-name");
     const endTime = new Date(timerEndData).getTime();
 
+    this.setFiveMinuteWarning(endTime, timerUserName);
+    this.setTimerInterval(endTime);
+  }
+
+  setFiveMinuteWarning(endTime, userName) {
+    if (this.moreThanFiveMinutesLeft(endTime) && Notification.permission == "granted") {
+      const fiveMinuteMark = this.getFiveMinuteMark(endTime);
+
+      setTimeout(() => {
+        const body = `Heads up! ${userName} has 5 minutes left`;
+        new Notification("5 minutes left", { body });
+      }, fiveMinuteMark );
+    }
+  }
+
+  setTimerInterval(endTime) {
     window.timerInterval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = endTime - now;
-      // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const timeLeft = this.getTimeLeft(endTime);
+      const minutes = this.timeLeftMinutes(timeLeft);
+      const seconds = this.timeLeftSeconds(timeLeft);
 
       this.countdownTarget.innerHTML = `${minutes}m ${seconds}s`;
 
-      if (distance >= 0 && distance <= 500 && this.alertTarget.paused) {
+      if (timeLeft >= 0 && timeLeft <= 500 && this.alertTarget.paused) {
         this.alertTarget.play();
       }
 
-      if (distance < 0) {
+      if (timeLeft < 0) {
         this.clearTimer();
         this.countdownTarget.innerHTML = "TIMES UP";
       }
     });
+  }
+
+  moreThanFiveMinutesLeft(endTime) {
+    return this.getTimeLeft(endTime) > FIVE_MINUTES;
+  }
+
+  getTimeLeft(endTime) {
+    const now = new Date().getTime();
+    return endTime - now;
+  }
+
+  getFiveMinuteMark(endTime) {
+    const now = new Date().getTime();
+    return (endTime - FIVE_MINUTES) - now;
+  }
+
+  timeLeftMinutes(timeLeft) {
+    return Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  }
+
+  timeLeftSeconds(timeLeft) {
+    return Math.floor((timeLeft % (1000 * 60)) / 1000);
   }
 
   clearTimer() {
