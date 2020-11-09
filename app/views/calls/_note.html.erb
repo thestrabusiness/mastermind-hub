@@ -1,3 +1,4 @@
-<div class="list-item">
-  <b><%= note.author.first_name %>:</b>&nbsp;<%= note.body %>
+<div>
+  <%= simple_format(note.author.first_name, class: 'note-author') %>
+  <%= simple_format(note.body, class: 'note-body') %>
 </div>
