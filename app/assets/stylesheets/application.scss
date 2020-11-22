@@ -1,9 +1,10 @@
-@import 'layout';
-@import 'list';
-@import 'form';
-@import 'navbar';
-@import 'card';
-@import 'call_details';
+@import "call_details";
+@import "card";
+@import "form";
+@import "layout";
+@import "list";
+@import "navbar";
+@import "note";
 
 body {
   margin: 0;
