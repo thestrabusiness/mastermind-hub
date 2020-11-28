@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :groups, through: :memberships
   has_many :created_groups, class_name: "Group", foreign_key: :creator_id
 
+  scope :receives_reminders, -> { where(receive_reminder_email: true) }
+
   def full_name
     "#{first_name} #{last_name}"
   end
