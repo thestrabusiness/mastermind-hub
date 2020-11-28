@@ -32,6 +32,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :user, only: :show
+  resource :user, only: [:edit, :update, :show]
   resources :users, only: [:create]
 end
