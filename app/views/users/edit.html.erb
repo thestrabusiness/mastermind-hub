@@ -1,0 +1,35 @@
+<div class="sign-up" id="clearance">
+  <h2>Edit Profile</h2>
+
+  <% if current_user.errors.present? %>
+    <div class="errors">
+      Please fill out all fields
+    </div>
+  <% end %>
+
+
+  <div class="form">
+    <%= form_for current_user, url: user_path, method: "put" do |form| %>
+
+      <div class="form-field">
+        <%= form.label :first_name %>
+        <%= form.text_field :first_name %>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :last_name %>
+        <%= form.text_field :last_name %>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+      </div>
+
+      <div class="form-field">
+        <%= form.submit %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
