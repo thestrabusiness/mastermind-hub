@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   constraints Clearance::Constraints::SignedIn.new do
-    root to: 'groups#index', as: :signed_in_root
+    root to: "groups#index", as: :signed_in_root
   end
 
   constraints Clearance::Constraints::SignedOut.new do
-    root to: 'sessions#new'
+    root to: "sessions#new"
   end
 
   resources :calls, only: [:show, :edit, :update] do
@@ -19,16 +21,17 @@ Rails.application.routes.draw do
     scope module: :groups do
       resources :group_invites, only: [:index, :create, :destroy]
     end
-    
+
     resources :memberships, only: :destroy
   end
 
   resources :group_invites, only: :index do
     member do
-      post 'accept'
-      post 'reject'
+      post "accept"
+      post "reject"
     end
   end
 
-  resources :users, only: :create
+  resource :user, only: :show
+  resources :users, only: [:create]
 end

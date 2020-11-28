@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < Clearance::UsersController
+  before_action :require_login, only: :show
+
+  def show; end
+
   def create
     @user = User.new(user_params)
     if @user.save
