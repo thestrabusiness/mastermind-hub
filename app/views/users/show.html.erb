@@ -3,6 +3,11 @@
     <div class="card-title"><%= current_user.full_name %></div>
     <div class="card-content">
       <div class="list-item"><%= current_user.email %></div>
+      <% if current_user.receive_reminder_email %>
+        <div class="list-item">Subscribed to reminder emails</div>
+      <% else %>
+        <div class="list-item">Not subscribed to reminder emails</div>
+      <% end %>
     </div>
     <div class="card-footer">
       <%= link_to "Edit Profile", edit_user_path %>

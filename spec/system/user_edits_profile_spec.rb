@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "User edits their profile" do
   context "as a signed in user" do
     it "updates their profile" do
-      user = create(:user)
+      user = create(:user, receive_reminder_email: false)
       first_name = "new"
       last_name = "name"
       email = "new@example.com"
@@ -14,6 +14,7 @@ RSpec.describe "User edits their profile" do
       fill_in :user_first_name, with: first_name
       fill_in :user_last_name, with: last_name
       fill_in :user_email, with: email
+      check :user_receive_reminder_email
       click_on "Update User"
 
       user.reload
@@ -21,6 +22,7 @@ RSpec.describe "User edits their profile" do
       expect(user.first_name).to eq first_name
       expect(user.last_name).to eq last_name
       expect(user.email).to eq email
+      expect(user.receive_reminder_email).to be true
     end
   end
 
