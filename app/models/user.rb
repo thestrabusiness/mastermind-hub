@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  validates :first_name, :last_name, presence: true
+
   has_many :memberships
   has_many :commitments, through: :memberships
   has_many :groups, through: :memberships
