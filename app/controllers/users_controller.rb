@@ -11,6 +11,7 @@ class UsersController < Clearance::UsersController
 
   def update
     if current_user.update(user_params)
+      flash[:notice] = "Profile updated"
       redirect_to user_path
     else
       render :edit
