@@ -1,16 +1,19 @@
 <div class="centered-content">
-  <div class="card card-large">
-    <div class="card-title"><%= current_user.full_name %></div>
-    <div class="card-content">
-      <div class="list-item"><%= current_user.email %></div>
-      <% if current_user.receive_reminder_email %>
-        <div class="list-item">Subscribed to reminder emails</div>
-      <% else %>
-        <div class="list-item">Not subscribed to reminder emails</div>
+  <div class="profile-content">
+    <div class="title-large">
+      <%= current_user.full_name %>
+      <%= link_to edit_user_path do %>
+        <%= octicon "pencil", height: 24 %>
       <% end %>
     </div>
-    <div class="card-footer">
-      <%= link_to "Edit Profile", edit_user_path %>
-    </div>
+
+    <%= UserAvatar.render(current_user, size: :large) %>
+
+    <div class="subtitle">Email: <%= current_user.email %></div>
+    <% if current_user.receive_reminder_email %>
+      <div class="subtitle">You are subscribed to reminder emails</div>
+    <% else %>
+      <div class="subtitle">You are not subscribed to reminder emails</div>
+    <% end %>
   </div>
 </div>
