@@ -12,6 +12,18 @@ RSpec.describe CommitmentReminderMailer do
 
       expect(mailer.to).to eq [user.email]
     end
+
+    it "doesn't send to users who are unsubscribed from reminders" do
+      group = create(:group)
+      subscribed_user = create(:user, receive_reminder_email: true)
+      unsubscribed_user = create(:user, receive_reminder_email: false)
+      group.users << [subscribed_user, unsubscribed_user]
+      call = create(:call, group: group)
+
+      mailer = CommitmentReminderMailer.post_call_reminder(call)
+
+      expect(mailer.to).to eq [subscribed_user.email]
+    end
   end
 
   describe ".mid_week_reminder" do
@@ -22,6 +34,18 @@ RSpec.describe CommitmentReminderMailer do
       mailer = CommitmentReminderMailer.mid_week_reminder(call)
 
       expect(mailer.to).to eq [user.email]
+    end
+
+    it "doesn't send to users who are unsubscribed from reminders" do
+      group = create(:group)
+      subscribed_user = create(:user, receive_reminder_email: true)
+      unsubscribed_user = create(:user, receive_reminder_email: false)
+      group.users << [subscribed_user, unsubscribed_user]
+      call = create(:call, group: group)
+
+      mailer = CommitmentReminderMailer.mid_week_reminder(call)
+
+      expect(mailer.to).to eq [subscribed_user.email]
     end
   end
 end
