@@ -36,7 +36,7 @@
         <div class="title">
           I'm committing to
         </div>
-        <%= form_with model: [@page.call, Commitment.new], remote: true do |form| %>
+        <%= form_with model: [@page.call, Commitment.new], local: false do |form| %>
           <div class="form-field">
             <%= form.text_area :body %>
           </div>

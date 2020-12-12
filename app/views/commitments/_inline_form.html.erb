@@ -1,6 +1,7 @@
 <%= form_with model: [call, commitment],
               class: "inline",
-              id: dom_id(commitment, "inline_form") do |form| %>
+              id: dom_id(commitment, "inline_form"),
+              local: false do |form| %>
   <div class="form-field full-width">
     <%= form.text_field :body %>
   </div>

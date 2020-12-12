@@ -23,7 +23,7 @@
     </div>
     <%= form_with model: [@page.call, Note.new],
                   url: call_note_path(@page.call),
-                  remote: true do |form| %>
+                  local: false do |form| %>
         <div class="form-field">
           <%= form.text_area :body, data: { target: "call-notes.textarea" } %>
         </div>

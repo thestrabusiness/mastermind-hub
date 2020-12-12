@@ -9,7 +9,7 @@ module CallCommitmentHelper
   def commitment_confirmation_link(commitment)
     if enable_commitment_link(commitment)
       link_to confirm_path(commitment),
-              remote: true,
+              local: false,
               method: :patch do
                 icon_container(commitment)
               end
