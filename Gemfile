@@ -16,7 +16,7 @@ gem "octicons_helper"
 gem "pg"
 gem "pry"
 gem "puma", "~> 5"
-gem "rails", git: "https://github.com/rails/rails.git", branch: "6-0-stable"
+gem "rails"
 gem "rubocop", "0.80.0", require: false
 gem "sass-rails", ">= 6"
 gem "turbolinks", "~> 5"
