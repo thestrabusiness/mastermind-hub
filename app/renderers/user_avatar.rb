@@ -6,16 +6,17 @@ class UserAvatar
 
   class SizeNotDefined < StandardError; end
 
-  AVATAR_SIZES = [:small, :large].freeze
-  LARGE_SIZE = 250
+  SIZES = [:small, :large].freeze
+  LARGE_PIXEL_SIZE = 250
 
   AVATAR_PROPS = {
     small: OpenStruct.new(css_class: nil, gravatar_size: nil),
-    large: OpenStruct.new(css_class: " avatar-large", gravatar_size: LARGE_SIZE)
+    large: OpenStruct.new(css_class: " avatar-large",
+                          gravatar_size: LARGE_PIXEL_SIZE)
   }.freeze
 
   def initialize(user, size)
-    unless AVATAR_SIZES.include?(size)
+    unless SIZES.include?(size)
       raise SizeNotDefined, "Size must be included in AVATAR_SIZES"
     end
 

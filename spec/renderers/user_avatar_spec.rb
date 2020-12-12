@@ -69,7 +69,7 @@ RSpec.describe UserAvatar do
         stub_http_request success_response
         user = build(:user)
         image_url = build_gravatar_url(user)
-        gravatar_size = UserAvatar::LARGE_SIZE
+        gravatar_size = UserAvatar::LARGE_PIXEL_SIZE
 
         result = UserAvatar.render(user, size: :large)
 
