@@ -87,3 +87,15 @@
     flex: 0.5;
   }
 }
+
+.card-tiny {
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+  min-height: 100px;
+  height: 100px;
+  width: 250px;
+  margin: 10px;
+
+  font-size: 1.25rem;
+}

@@ -27,9 +27,9 @@
                section_id: "upcoming_call" %>
   <% else %>
     <div class="section">
-      <%= link_to "Add a new call",
-        new_group_call_path(@group),
-        html_options: { class: "title" } %>
+      <div class="card card-tiny list-item">
+        <%= link_to "Schedule a new call", new_group_call_path(@group) %>
+      </div>
     </div>
   <% end %>
 
