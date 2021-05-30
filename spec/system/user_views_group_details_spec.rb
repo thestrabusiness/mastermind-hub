@@ -24,7 +24,7 @@ RSpec.describe "User views group details page" do
 
         visit group_path(group, as: user)
 
-        expect(page).to have_content "Add a new call"
+        expect(page).to have_content "Schedule a new call"
       end
     end
 
