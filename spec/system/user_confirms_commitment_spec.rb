@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "User confirms a commitment", js: true do
   context "when the comittment is not completed" do
     it "sets completed to true and updates the icon to a check" do
       membership = create(:membership)
-      last_weeks_call = create(:call, group: membership.group, scheduled_on: 7.days.ago)
+      last_weeks_call = create(:call, group: membership.group,
+                                      scheduled_on: 7.days.ago)
       call = create(:call, group: membership.group)
       commitment = create(
         :commitment,
@@ -24,7 +27,8 @@ RSpec.describe "User confirms a commitment", js: true do
   context "when the comittment is already completed" do
     it "sets completed to false and updates the icon to an X" do
       membership = create(:membership)
-      last_weeks_call = create(:call, group: membership.group, scheduled_on: 7.days.ago)
+      last_weeks_call = create(:call, group: membership.group,
+                                      scheduled_on: 7.days.ago)
       call = create(:call, group: membership.group)
       commitment = create(
         :commitment,
