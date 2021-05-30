@@ -19,6 +19,7 @@ gem "puma", "~> 5"
 gem "rails"
 gem "rubocop", "0.80.0", require: false
 gem "sass-rails", ">= 6"
+gem "solargraph"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
 
