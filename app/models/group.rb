@@ -28,11 +28,7 @@ class Group < ApplicationRecord
   end
 
   def upcoming_call
-    existing_call = calls.after(Date.current).first
-
-    return calls.create(scheduled_on: next_call_date) if existing_call.nil?
-
-    existing_call
+    calls.after(Date.current).first
   end
 
   def todays_call
@@ -50,8 +46,6 @@ class Group < ApplicationRecord
   def user_select_options
     users.map { |user| [user.full_name, user.id] }
   end
-
-  private
 
   def next_call_date
     if call_day_before_type_cast == Date.current.wday

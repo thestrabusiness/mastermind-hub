@@ -3,8 +3,6 @@
 class GroupInviter
   def self.perform(email, group, user)
     invite = GroupInvite.create(email: email, group: group)
-    if invite.valid?
-      GroupInviteMailer.invite(invite, user).deliver_now
-    end
+    GroupInviteMailer.invite(invite, user).deliver_now if invite.valid?
   end
 end

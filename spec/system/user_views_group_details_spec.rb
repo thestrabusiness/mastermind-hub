@@ -17,13 +17,27 @@ RSpec.describe "User views group details page" do
   end
 
   context "when there is no call today" do
-    it "renders details for the upcoming call" do
-      user = create(:user, :facilitator)
-      group = user.groups.first
+    context "and there is no upcoming call" do
+      it "renders a new call link" do
+        user = create(:user, :facilitator)
+        group = user.groups.first
 
-      visit group_path(group, as: user)
+        visit group_path(group, as: user)
 
-      expect(page).to have_content "Upcoming call"
+        expect(page).to have_content "Add a new call"
+      end
+    end
+
+    context "and there is an upcoming call scheduled" do
+      it "renders details for the upcoming call" do
+        user = create(:user, :facilitator)
+        group = user.groups.first
+        create(:call, group: group, scheduled_on: 7.days.from_now)
+
+        visit group_path(group, as: user)
+
+        expect(page).to have_content "Upcoming call"
+      end
     end
   end
 

@@ -31,9 +31,7 @@ class GroupsController < ApplicationController
   def edit
     @group = current_user.groups.find(params[:id])
 
-    if current_user != @group.creator
-      redirect_to groups_path
-    end
+    redirect_to groups_path if current_user != @group.creator
   end
 
   def update
@@ -49,9 +47,7 @@ class GroupsController < ApplicationController
   def destroy
     @group = current_user.groups.find(params[:id])
 
-    if current_user == @group.creator
-      @group.destroy
-    end
+    @group.destroy if current_user == @group.creator
 
     redirect_to groups_path
   end
