@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
 
     resources :memberships, only: :destroy
+    resources :calls, only: [:new, :create]
   end
 
   resources :group_invites, only: :index do
