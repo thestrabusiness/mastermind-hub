@@ -20,15 +20,21 @@
                title: "Today's call",
                calls: [@group.todays_call],
                section_id: "todays_call" %>
-  <% else %>
+  <% elsif @group.upcoming_call.present? %>
     <%= render "calls_section",
                title: "Upcoming call",
                calls: [@group.upcoming_call],
                section_id: "upcoming_call" %>
+  <% else %>
+    <div class="section">
+      <div class="card card-tiny list-item">
+        <%= link_to "Schedule a new call", new_group_call_path(@group) %>
+      </div>
+    </div>
   <% end %>
 
   <%= render "calls_section",
-             title: "Previous call",
+             title: "Previous calls",
              calls: @previous_calls,
              section_id: "previous_calls" %>
 </div>
