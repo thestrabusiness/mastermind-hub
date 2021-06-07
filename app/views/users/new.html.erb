@@ -3,7 +3,9 @@
 
   <% if @user.errors.present? %>
     <div class="errors">
-      Please fill out all fields
+      <% @user.errors.full_messages.each do |error_message| %>
+        <%= error_message %>
+      <% end %>
     </div>
   <% end %>
 
