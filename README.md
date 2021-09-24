@@ -5,8 +5,8 @@ hold once a week.
 
 ## Dev Requirements
 
-* Ruby 2.7.2
-* Yarn
+* Ruby 2.7.3
+* Yarn with Node.js v14
 * PostgreSQL 11
 
 ## Setup
