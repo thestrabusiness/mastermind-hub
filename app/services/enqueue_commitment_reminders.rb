@@ -6,7 +6,7 @@ class EnqueueCommitmentReminders
 
     CommitmentReminderMailer
       .post_call_reminder(call)
-      .deliver_later(wait_until: call.scheduled_on + 2.hours)
+      .deliver_later(wait: 2.hours)
 
     CommitmentReminderMailer
       .mid_week_reminder(call)
