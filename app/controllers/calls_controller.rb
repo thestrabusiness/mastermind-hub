@@ -37,14 +37,13 @@ class CallsController < ApplicationController
 
   def load_and_authorize_call
     action = action_name.to_sym
-    if [:show, :update].include? action
+    if [:show, :update, :edit].include? action
       @call = Call.find(params[:id])
-
-      redirect_to groups_path unless @call.group.users.includes(current_user)
+      redirect_to groups_path unless @call.group.users.include?(current_user)
     end
 
     if [:new, :create].include? action
-      redirect_to groups_path unless @group.users.includes(current_user)
+      redirect_to groups_path unless @group.users.include?(current_user)
     end
   end
 
