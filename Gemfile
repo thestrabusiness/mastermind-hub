@@ -12,6 +12,7 @@ gem "delayed_job_active_record"
 gem "dotenv-rails"
 gem "erb_lint", "0.0.29", require: false
 gem "factory_bot_rails"
+gem "foreman"
 gem "octicons_helper"
 gem "pg"
 gem "pry"
