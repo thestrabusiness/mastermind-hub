@@ -8,7 +8,6 @@ ruby "2.7.4"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "chronic", require: false
 gem "clearance"
-gem "delayed_job_active_record"
 gem "dotenv-rails"
 gem "erb_lint", "0.0.29", require: false
 gem "factory_bot_rails"
@@ -17,10 +16,11 @@ gem "octicons_helper"
 gem "pg"
 gem "pry"
 gem "puma", "~> 5"
-gem "rails"
+gem "rails", "~> 7.0.1"
 gem "rubocop", "0.80.0", require: false
 gem "sass-rails", ">= 6"
 gem "solargraph"
+gem "sprockets-rails"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
 
@@ -36,7 +36,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "bullet"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails", "~> 4.0.0.beta"
   gem "shoulda-matchers"

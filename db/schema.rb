@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_11_28_221225) do
   create_table "calls", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "scheduled_on", null: false
+    t.datetime "scheduled_on", precision: 6, null: false
     t.bigint "group_id", null: false
     t.index ["group_id"], name: "index_calls_on_group_id"
     t.index ["scheduled_on"], name: "index_calls_on_scheduled_on"
@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(version: 2020_11_28_221225) do
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
     t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: 6
+    t.datetime "locked_at", precision: 6
+    t.datetime "failed_at", precision: 6
     t.string "locked_by"
     t.string "queue"
     t.datetime "created_at", precision: 6

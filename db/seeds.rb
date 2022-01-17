@@ -39,7 +39,7 @@ group = Group.create!(name: 'Fellas', creator: anthony, call_time: '16:00')
 group.memberships.create!(user: anthony, role: Membership::FACILITATOR)
 group.users << [kurt, eric, tad, joe]
 
-upcoming_call = group.upcoming_call
+upcoming_call = group.calls.create!(scheduled_on: 7.days.from_now)
 todays_call = group
   .calls
   .create!(scheduled_on: upcoming_call.scheduled_on - 7.days)
