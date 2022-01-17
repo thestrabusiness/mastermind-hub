@@ -10,6 +10,7 @@ module MastermindHub
   class Application < Rails::Application
     config.load_defaults 7.0
     config.action_mailer.default_url_options = { host: ENV.fetch("APPLICATION_HOST") }
+    config.active_job.queue_adapter = :delayed
 
     # Configuration for the application, engines, and railties goes here.
     #
