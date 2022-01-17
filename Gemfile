@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.4"
+ruby "3.1.0"
 
 gem "bootsnap", ">= 1.4.2", require: false
 gem "chronic", require: false
@@ -22,7 +22,7 @@ gem "sass-rails", ">= 6"
 gem "solargraph"
 gem "sprockets-rails"
 gem "turbolinks", "~> 5"
-gem "webpacker", "~> 4.0"
+gem "webpacker"
 
 group :production do
   gem "redis"
